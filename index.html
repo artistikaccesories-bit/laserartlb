@@ -51,44 +51,51 @@ header img{width:120px;margin-bottom:15px}
 }
 
 .product-info{padding:18px}
-
 .price{color:#aaa;margin-top:6px}
 
-/* MODAL */
-.modal{
+/* OVERLAY PRODUCT PAGE */
+.overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.85);
-  backdrop-filter:blur(6px);
+  background:rgba(0,0,0,.9);
   display:none;
-  justify-content:center;
-  align-items:center;
   z-index:1000;
+  overflow-y:auto;
 }
 
-.modalBox{
+.overlayContent{
+  max-width:480px;
+  margin:40px auto;
   background:#141414;
-  width:95%;
-  max-width:420px;
-  border-radius:20px;
+  border-radius:22px;
   overflow:hidden;
-  animation:zoom .35s ease;
 }
 
-@keyframes zoom{
-  from{transform:scale(.7);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-
-.modalBox img{
+.overlayContent img{
   width:100%;
-  height:240px;
+  height:280px;
   object-fit:cover;
 }
 
-.modalContent{padding:20px}
+.overlayBody{
+  padding:22px;
+}
 
-label{display:block;margin-top:12px;color:#aaa}
+.closeBtn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  font-size:28px;
+  cursor:pointer;
+  color:#fff;
+}
+
+label{
+  display:block;
+  margin-top:14px;
+  color:#aaa;
+  font-size:14px;
+}
 
 input,textarea{
   width:100%;
@@ -97,10 +104,10 @@ input,textarea{
   color:#fff;
   padding:10px;
   border-radius:10px;
-  margin-top:5px;
+  margin-top:6px;
 }
 
-textarea{resize:none;min-height:70px}
+textarea{resize:none;min-height:80px}
 
 .checkbox{
   display:flex;
@@ -113,8 +120,8 @@ textarea{resize:none;min-height:70px}
 
 button{
   width:100%;
-  margin-top:18px;
-  padding:14px;
+  margin-top:20px;
+  padding:15px;
   border:none;
   border-radius:30px;
   background:linear-gradient(135deg,#777,#aaa);
@@ -153,26 +160,29 @@ button{
 
 </div>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modalBox">
-    <img id="modalImg">
-    <div class="modalContent" id="modalContent"></div>
+<!-- PRODUCT OVERLAY -->
+<div class="overlay" id="overlay">
+  <div class="closeBtn" onclick="closeOverlay()">×</div>
+  <div class="overlayContent">
+    <img id="o_img">
+    <div class="overlayBody" id="o_body"></div>
   </div>
 </div>
 
 <script>
-const modal = document.getElementById("modal");
-const modalImg = document.getElementById("modalImg");
-const modalContent = document.getElementById("modalContent");
+const overlay=document.getElementById("overlay");
+const o_img=document.getElementById("o_img");
+const o_body=document.getElementById("o_body");
 
 function openProduct(id){
-  modal.style.display="flex";
+  overlay.style.display="block";
+  document.body.style.overflow="hidden";
 
   if(id==="p1"){
-    modalImg.src="p1.jpg";
-    modalContent.innerHTML=`
-      <h3>Lebanese Number Plate Keychain</h3>
+    o_img.src="p1.jpg";
+    o_body.innerHTML=`
+      <h2>Lebanese Number Plate Keychain</h2>
+      <div class="price">$10</div>
 
       <label>Quantity</label>
       <input type="number" value="1" min="1">
@@ -194,9 +204,10 @@ function openProduct(id){
   }
 
   if(id==="p2"){
-    modalImg.src="p2.jpg";
-    modalContent.innerHTML=`
-      <h3>Pet Tag</h3>
+    o_img.src="p2.jpg";
+    o_body.innerHTML=`
+      <h2>Pet Tag</h2>
+      <div class="price">$10</div>
 
       <label>Quantity</label>
       <input type="number" value="1">
@@ -210,9 +221,14 @@ function openProduct(id){
 }
 
 function toggleOther(box){
-  box.closest(".modalContent")
+  box.closest(".overlayBody")
      .querySelector(".otherSide").style.display =
      box.checked ? "block" : "none";
+}
+
+function closeOverlay(){
+  overlay.style.display="none";
+  document.body.style.overflow="auto";
 }
 
 function order(name){
@@ -222,13 +238,6 @@ function order(name){
     )
   );
 }
-
-// CLOSE modal by clicking background only
-modal.addEventListener("click", e=>{
-  if(e.target === modal){
-    modal.style.display="none";
-  }
-});
 </script>
 
 </body>
