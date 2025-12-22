@@ -13,15 +13,13 @@
 body{
   margin:0;
   font-family:'Inter',sans-serif;
-  background:#0c0c0c;
+  background:#0b0b0b;
   color:#fff;
   opacity:0;
-  animation:fadeIn 1s ease forwards;
+  animation:fadeIn 1s forwards;
 }
 
-@keyframes fadeIn{
-  to{opacity:1}
-}
+@keyframes fadeIn{to{opacity:1}}
 
 header{
   text-align:center;
@@ -29,25 +27,11 @@ header{
   border-bottom:1px solid #222;
 }
 
-header img{
-  width:120px;
-  margin-bottom:15px;
-}
-
-header h1{
-  margin:0;
-  font-size:32px;
-  letter-spacing:2px;
-}
-
-header p{
-  color:#aaa;
-  margin-top:8px;
-}
+header img{width:120px;margin-bottom:15px}
 
 .products{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:25px;
   padding:40px;
   max-width:1200px;
@@ -58,14 +42,11 @@ header p{
   background:#151515;
   border-radius:18px;
   overflow:hidden;
-  box-shadow:0 10px 30px rgba(0,0,0,.4);
-  transition:transform .3s;
   cursor:pointer;
+  transition:transform .3s;
 }
 
-.product:hover{
-  transform:translateY(-5px);
-}
+.product:hover{transform:translateY(-6px)}
 
 .product img{
   width:100%;
@@ -74,34 +55,61 @@ header p{
 }
 
 .product-info{
+  padding:18px;
+}
+
+.price{color:#aaa;margin-top:6px}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.8);
+  backdrop-filter:blur(6px);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+
+.modalBox{
+  background:#141414;
+  border-radius:20px;
+  width:95%;
+  max-width:420px;
+  overflow:auto;
+  animation:zoom .35s ease;
+}
+
+@keyframes zoom{
+  from{transform:scale(.7);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.modalBox img{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+}
+
+.modalContent{
   padding:20px;
-}
-
-.product-info h3{
-  margin:0;
-  font-size:20px;
-}
-
-.price{
-  color:#ccc;
-  margin:8px 0 15px;
 }
 
 label{
   display:block;
-  margin-top:10px;
-  font-size:14px;
+  margin-top:12px;
   color:#aaa;
+  font-size:14px;
 }
 
-input[type=number],
-textarea{
+input,textarea{
   width:100%;
   background:#0f0f0f;
   border:1px solid #333;
-  border-radius:10px;
-  padding:10px;
   color:#fff;
+  padding:10px;
+  border-radius:10px;
   margin-top:5px;
 }
 
@@ -114,47 +122,18 @@ textarea{resize:none;min-height:70px}
   margin-top:10px;
 }
 
-.otherSideBox{
-  display:none;
-}
+.otherSide{display:none}
 
 button{
   width:100%;
   margin-top:15px;
   padding:14px;
-  background:linear-gradient(135deg,#666,#999);
   border:none;
   border-radius:30px;
+  background:linear-gradient(135deg,#666,#999);
   color:#000;
   font-weight:700;
   cursor:pointer;
-}
-
-.pay{
-  background:linear-gradient(135deg,#0f9d58,#2ecc71);
-  margin-top:10px;
-}
-
-/* MODAL */
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.85);
-  display:none;
-  align-items:center;
-  justify-content:center;
-}
-
-.modal img{
-  max-width:90%;
-  max-height:90%;
-  border-radius:16px;
-  animation:zoom .3s ease;
-}
-
-@keyframes zoom{
-  from{transform:scale(.7)}
-  to{transform:scale(1)}
 }
 </style>
 </head>
@@ -162,158 +141,97 @@ button{
 <body>
 
 <header>
-  <img src="logo.png">
+  <img src="logo.webp">
   <h1>LASER ART LB</h1>
-  <p>Stainless Steel • Laser Engraving • Custom Made</p>
+  <p>Stainless Steel • Laser Engraving</p>
 </header>
 
 <div class="products">
 
-<!-- PRODUCT 1 -->
-<div class="product" onclick="zoomImg('p1.jpg')">
-<img src="p1.jpg">
-<div class="product-info">
-<h3>Lebanese Number Plate Keychain</h3>
-<div class="price">$10 • Stainless Steel</div>
-
-<label>Quantity</label>
-<input type="number" id="p1_qty" value="1" min="1">
-
-<div class="checkbox">
-<input type="checkbox" id="p1_other" onclick="toggleOther('p1')">
-<span>Engrave on other side (+$3)</span>
+<div class="product" onclick="openModal(1)">
+  <img src="p1.jpg">
+  <div class="product-info">
+    <h3>Lebanese Number Plate Keychain</h3>
+    <div class="price">$10</div>
+  </div>
 </div>
 
-<div class="otherSideBox" id="p1_otherBox">
-<textarea id="p1_otherNote" placeholder="Other side engraving details..."></textarea>
+<div class="product" onclick="openModal(2)">
+  <img src="p2.jpg">
+  <div class="product-info">
+    <h3>Pet Tag</h3>
+    <div class="price">$10</div>
+  </div>
 </div>
 
-<label>Main engraving</label>
-<textarea id="p1_note" placeholder="Plate number, governorate..."></textarea>
-
-<button onclick="order(event,'Lebanese Number Plate Keychain','p1')">Order on WhatsApp</button>
-<button class="pay" onclick="whish(event)">Pay by Whish Money</button>
-</div>
-</div>
-
-<!-- PRODUCT 2 -->
-<div class="product" onclick="zoomImg('p2.jpg')">
-<img src="p2.jpg">
-<div class="product-info">
-<h3>Pet Tag</h3>
-<div class="price">$10 • Stainless Steel</div>
-
-<label>Quantity</label>
-<input type="number" id="p2_qty" value="1" min="1">
-
-<div class="checkbox">
-<input type="checkbox" id="p2_other" onclick="toggleOther('p2')">
-<span>Engrave on other side (+$3)</span>
+<div class="product" onclick="openModal(3)">
+  <img src="p3.jpg">
+  <div class="product-info">
+    <h3>Couples Promise Keychain</h3>
+    <div class="price">$10</div>
+  </div>
 </div>
 
-<div class="otherSideBox" id="p2_otherBox">
-<textarea id="p2_otherNote" placeholder="Other side details..."></textarea>
-</div>
-
-<label>Main engraving</label>
-<textarea id="p2_note" placeholder="Pet name, phone number..."></textarea>
-
-<button onclick="order(event,'Pet Tag','p2')">Order on WhatsApp</button>
-<button class="pay" onclick="whish(event)">Pay by Whish Money</button>
-</div>
-</div>
-
-<!-- PRODUCT 3 -->
-<div class="product" onclick="zoomImg('p3.jpg')">
-<img src="p3.jpg">
-<div class="product-info">
-<h3>Couples Promise Keychain</h3>
-<div class="price">$10 • Stainless Steel</div>
-
-<label>Quantity</label>
-<input type="number" id="p3_qty" value="1" min="1">
-
-<label>Engraving</label>
-<textarea id="p3_note">Wherever you go, come back to me</textarea>
-
-<button onclick="order(event,'Couples Promise Keychain','p3')">Order on WhatsApp</button>
-<button class="pay" onclick="whish(event)">Pay by Whish Money</button>
-</div>
-</div>
-
-<!-- PRODUCT 4 -->
-<div class="product" onclick="zoomImg('p4.jpg')">
-<img src="p4.jpg">
-<div class="product-info">
-<h3>Laser Cutting Service</h3>
-<div class="price">Price depends on design</div>
-
-<label>Describe your request</label>
-<textarea id="p4_note" placeholder="Material, size, quantity, file type..."></textarea>
-
-<button onclick="service(event)">Request on WhatsApp</button>
-</div>
+<div class="product" onclick="openModal(4)">
+  <img src="p4.jpg">
+  <div class="product-info">
+    <h3>Laser Cutting Service</h3>
+    <div class="price">Price depends</div>
+  </div>
 </div>
 
 </div>
 
-<!-- IMAGE MODAL -->
+<!-- MODAL -->
 <div class="modal" id="modal" onclick="closeModal()">
-<img id="modalImg">
+  <div class="modalBox" onclick="event.stopPropagation()">
+    <img id="m_img">
+    <div class="modalContent" id="m_content"></div>
+  </div>
 </div>
 
 <script>
-function zoomImg(src){
-  document.getElementById("modalImg").src=src;
-  document.getElementById("modal").style.display="flex";
+function openModal(id){
+  const modal=document.getElementById("modal");
+  const img=document.getElementById("m_img");
+  const c=document.getElementById("m_content");
+
+  if(id===1){
+    img.src="p1.jpg";
+    c.innerHTML=`
+    <h3>Lebanese Number Plate Keychain</h3>
+    <label>Quantity</label><input type="number" value="1">
+    <div class="checkbox">
+      <input type="checkbox" onclick="this.nextElementSibling.nextElementSibling.style.display=this.checked?'block':'none'">
+      <span>Engrave on other side (+$3)</span>
+    </div>
+    <div class="otherSide">
+      <textarea placeholder="Other side engraving details"></textarea>
+    </div>
+    <label>Main engraving</label>
+    <textarea placeholder="Plate number, governorate..."></textarea>
+    <button onclick="order('Lebanese Number Plate Keychain')">Buy</button>`;
+  }
+
+  if(id===4){
+    img.src="p4.jpg";
+    c.innerHTML=`
+    <h3>Laser Cutting Service</h3>
+    <label>Describe your request</label>
+    <textarea></textarea>
+    <button onclick="order('Laser Cutting Service')">Contact</button>`;
+  }
+
+  modal.style.display="flex";
 }
+
 function closeModal(){
   document.getElementById("modal").style.display="none";
 }
 
-function toggleOther(id){
-  document.getElementById(id+"_otherBox").style.display =
-  document.getElementById(id+"_other").checked ? "block":"none";
-}
-
-function order(e,name,id){
-  e.stopPropagation();
-  let qty=document.getElementById(id+"_qty").value;
-  let note=document.getElementById(id+"_note").value;
-  let other=document.getElementById(id+"_other")?.checked;
-  let otherNote=document.getElementById(id+"_otherNote")?.value||"";
-
-  let total=(10+(other?3:0))*qty;
-
-  let msg=`Hello Laser Art LB 👋
-
-Product: ${name}
-Quantity: ${qty}
-Total: $${total}
-
-Main engraving:
-${note}
-
-Other side:
-${other?otherNote:"No"}
-
-Payment: Cash on Delivery`;
-
-  window.open("https://wa.me/96181388115?text="+encodeURIComponent(msg));
-}
-
-function service(e){
-  e.stopPropagation();
-  let note=document.getElementById("p4_note").value;
+function order(name){
   window.open("https://wa.me/96181388115?text="+encodeURIComponent(
-    "Hello Laser Art LB 👋\n\nLaser cutting request:\n"+note
-  ));
-}
-
-function whish(e){
-  e.stopPropagation();
-  window.open("https://wa.me/96181388115?text="+encodeURIComponent(
-    "Hello 👋 I want to pay using Whish Money"
+    "Hello Laser Art LB 👋\n\nProduct: "+name
   ));
 }
 </script>
