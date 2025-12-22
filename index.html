@@ -10,6 +10,7 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:'Inter',sans-serif;
@@ -17,6 +18,7 @@ body{
   color:#fff;
 }
 
+/* HEADER */
 header{
   text-align:center;
   padding:35px 20px 45px;
@@ -46,6 +48,7 @@ header img{width:120px;margin-bottom:10px}
   opacity:.85;
 }
 
+/* PRODUCTS GRID */
 .products{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -74,10 +77,10 @@ header img{width:120px;margin-bottom:10px}
 .product-info{padding:18px}
 .price{color:#aaa;margin-top:6px}
 
-/* SERVICES STYLE */
+/* SERVICES */
 .service{
-  border:1px solid #333;
   background:#101010;
+  border:1px solid #333;
 }
 
 /* OVERLAY */
@@ -116,6 +119,7 @@ header img{width:120px;margin-bottom:10px}
   cursor:pointer;
 }
 
+/* FORM ELEMENTS */
 label{
   display:block;
   margin-top:14px;
@@ -123,7 +127,7 @@ label{
   font-size:14px;
 }
 
-input,textarea{
+input[type="number"], textarea{
   width:100%;
   background:#0f0f0f;
   border:1px solid #333;
@@ -133,20 +137,39 @@ input,textarea{
   margin-top:6px;
 }
 
-textarea{resize:none;min-height:80px}
+textarea{
+  resize:none;
+  min-height:80px;
+}
 
+/* ✅ FIXED CHECKBOX ALIGNMENT */
 .checkbox{
   display:flex;
   align-items:center;
-  gap:10px;
-  margin-top:14px;
   justify-content:flex-start;
+  gap:8px;
+  margin-top:14px;
   width:100%;
 }
 
+.checkbox input[type="checkbox"]{
+  width:auto;
+  margin:0;
+  accent-color:#aaa;
+}
 
-.otherSide{display:none}
+.checkbox span{
+  font-size:14px;
+  color:#ccc;
+}
 
+/* OTHER SIDE */
+.otherSide{
+  display:none;
+  margin-top:10px;
+}
+
+/* BUTTON */
 button{
   width:100%;
   margin-top:18px;
@@ -165,10 +188,8 @@ button{
 
 <header>
   <div class="socials">
-    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg"
-         onclick="openWA()">
-    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"
-         onclick="openIG()">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" onclick="openWA()">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" onclick="openIG()">
   </div>
 
   <img src="logo.webp">
@@ -178,71 +199,17 @@ button{
 
 <div class="products">
 
-<!-- PRODUCTS -->
-<div class="product" onclick="openProduct('p1')">
-  <img src="p1.jpg">
-  <div class="product-info">
-    <h3>Lebanese Number Plate Keychain</h3>
-    <div class="price">$10</div>
-  </div>
-</div>
+<!-- 6 PRODUCTS -->
+<div class="product" onclick="openProduct('p1')"><img src="p1.jpg"><div class="product-info"><h3>Lebanese Number Plate Keychain</h3><div class="price">$10</div></div></div>
+<div class="product" onclick="openProduct('p2')"><img src="p2.jpg"><div class="product-info"><h3>Pet Tag</h3><div class="price">$10</div></div></div>
+<div class="product" onclick="openProduct('p3')"><img src="p3.jpg"><div class="product-info"><h3>Couples Promise Keychain</h3><div class="price">$10</div></div></div>
+<div class="product" onclick="openProduct('p4')"><img src="p4.jpg"><div class="product-info"><h3>Custom Logo Keychain</h3><div class="price">$10</div></div></div>
+<div class="product" onclick="openProduct('p5')"><img src="p5.jpg"><div class="product-info"><h3>Name Keychain</h3><div class="price">$10</div></div></div>
+<div class="product" onclick="openProduct('p6')"><img src="p6.jpg"><div class="product-info"><h3>Car Logo Keychain</h3><div class="price">$10</div></div></div>
 
-<div class="product" onclick="openProduct('p2')">
-  <img src="p2.jpg">
-  <div class="product-info">
-    <h3>Pet Tag</h3>
-    <div class="price">$10</div>
-  </div>
-</div>
-
-<div class="product" onclick="openProduct('p3')">
-  <img src="p3.jpg">
-  <div class="product-info">
-    <h3>Couples Promise Keychain</h3>
-    <div class="price">$10</div>
-  </div>
-</div>
-
-<div class="product" onclick="openProduct('p4')">
-  <img src="p4.jpg">
-  <div class="product-info">
-    <h3>Custom Logo Keychain</h3>
-    <div class="price">$10</div>
-  </div>
-</div>
-
-<div class="product" onclick="openProduct('p5')">
-  <img src="p5.jpg">
-  <div class="product-info">
-    <h3>Name Keychain</h3>
-    <div class="price">$10</div>
-  </div>
-</div>
-
-<div class="product" onclick="openProduct('p6')">
-  <img src="p6.jpg">
-  <div class="product-info">
-    <h3>Car Logo Keychain</h3>
-    <div class="price">$10</div>
-  </div>
-</div>
-
-<!-- SERVICES (BOTTOM) -->
-<div class="product service" onclick="openService('engraving')">
-  <img src="p7.jpg">
-  <div class="product-info">
-    <h3>Laser Engraving Service</h3>
-    <div class="price">Pricing depends</div>
-  </div>
-</div>
-
-<div class="product service" onclick="openService('cutting')">
-  <img src="p8.jpg">
-  <div class="product-info">
-    <h3>Laser Cutting Service</h3>
-    <div class="price">Pricing depends</div>
-  </div>
-</div>
+<!-- SERVICES -->
+<div class="product service" onclick="openService('engraving')"><img src="p7.jpg"><div class="product-info"><h3>Laser Engraving Service</h3><div class="price">Pricing depends</div></div></div>
+<div class="product service" onclick="openService('cutting')"><img src="p8.jpg"><div class="product-info"><h3>Laser Cutting Service</h3><div class="price">Pricing depends</div></div></div>
 
 </div>
 
@@ -269,6 +236,7 @@ function openProduct(id){
 
   o_body.innerHTML=`
     <h2>${name}</h2>
+
     <label>Quantity</label>
     <input type="number" id="qty" value="1" min="1">
 
@@ -298,9 +266,7 @@ function openService(type){
   o_body.innerHTML=`
     <h2>${title}</h2>
     <p class="price">Pricing depends</p>
-
-    <textarea id="note" placeholder="Describe your request (material, size, quantity...)"></textarea>
-
+    <textarea id="note" placeholder="Describe your request"></textarea>
     <button onclick="sendOrder('${title}')">Contact via WhatsApp</button>
   `;
 }
