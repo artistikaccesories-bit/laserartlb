@@ -8,11 +8,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
+*{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:'Inter',sans-serif;
-  background:#0e0e0e;
+  background:#0c0c0c;
   color:#fff;
+  opacity:0;
+  animation:fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn{
+  to{opacity:1}
 }
 
 header{
@@ -48,9 +56,15 @@ header p{
 
 .product{
   background:#151515;
-  border-radius:16px;
+  border-radius:18px;
   overflow:hidden;
   box-shadow:0 10px 30px rgba(0,0,0,.4);
+  transition:transform .3s;
+  cursor:pointer;
+}
+
+.product:hover{
+  transform:translateY(-5px);
 }
 
 .product img{
@@ -91,10 +105,7 @@ textarea{
   margin-top:5px;
 }
 
-textarea{
-  resize:none;
-  min-height:70px;
-}
+textarea{resize:none;min-height:70px}
 
 .checkbox{
   display:flex;
@@ -103,11 +114,15 @@ textarea{
   margin-top:10px;
 }
 
+.otherSideBox{
+  display:none;
+}
+
 button{
   width:100%;
   margin-top:15px;
   padding:14px;
-  background:linear-gradient(135deg,#555,#888);
+  background:linear-gradient(135deg,#666,#999);
   border:none;
   border-radius:30px;
   color:#000;
@@ -115,8 +130,31 @@ button{
   cursor:pointer;
 }
 
-button:hover{
-  opacity:.9;
+.pay{
+  background:linear-gradient(135deg,#0f9d58,#2ecc71);
+  margin-top:10px;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:16px;
+  animation:zoom .3s ease;
+}
+
+@keyframes zoom{
+  from{transform:scale(.7)}
+  to{transform:scale(1)}
 }
 </style>
 </head>
@@ -124,7 +162,7 @@ button:hover{
 <body>
 
 <header>
-  <img src="logo.png" alt="Laser Art LB">
+  <img src="logo.webp">
   <h1>LASER ART LB</h1>
   <p>Stainless Steel • Laser Engraving • Custom Made</p>
 </header>
@@ -132,164 +170,151 @@ button:hover{
 <div class="products">
 
 <!-- PRODUCT 1 -->
-<div class="product">
+<div class="product" onclick="zoomImg('p1.jpg')">
 <img src="p1.jpg">
 <div class="product-info">
-<h3>Custom Name Keychain</h3>
+<h3>Lebanese Number Plate Keychain</h3>
 <div class="price">$10 • Stainless Steel</div>
 
 <label>Quantity</label>
 <input type="number" id="p1_qty" value="1" min="1">
 
 <div class="checkbox">
-<input type="checkbox" id="p1_both">
-<span>Engrave both sides (+$3)</span>
+<input type="checkbox" id="p1_other" onclick="toggleOther('p1')">
+<span>Engrave on other side (+$3)</span>
 </div>
 
-<label>Engraving details</label>
-<textarea id="p1_note" placeholder="Name, font style, symbols..."></textarea>
+<div class="otherSideBox" id="p1_otherBox">
+<textarea id="p1_otherNote" placeholder="Other side engraving details..."></textarea>
+</div>
 
-<button onclick="order('Custom Name Keychain','p1')">Order on WhatsApp</button>
+<label>Main engraving</label>
+<textarea id="p1_note" placeholder="Plate number, governorate..."></textarea>
+
+<button onclick="order(event,'Lebanese Number Plate Keychain','p1')">Order on WhatsApp</button>
+<button class="pay" onclick="whish(event)">Pay by Whish Money</button>
 </div>
 </div>
 
 <!-- PRODUCT 2 -->
-<div class="product">
+<div class="product" onclick="zoomImg('p2.jpg')">
 <img src="p2.jpg">
 <div class="product-info">
-<h3>Car Logo Keychain</h3>
+<h3>Pet Tag</h3>
 <div class="price">$10 • Stainless Steel</div>
 
 <label>Quantity</label>
 <input type="number" id="p2_qty" value="1" min="1">
 
 <div class="checkbox">
-<input type="checkbox" id="p2_both">
-<span>Engrave both sides (+$3)</span>
+<input type="checkbox" id="p2_other" onclick="toggleOther('p2')">
+<span>Engrave on other side (+$3)</span>
 </div>
 
-<label>Engraving details</label>
-<textarea id="p2_note" placeholder="Car brand, text..."></textarea>
+<div class="otherSideBox" id="p2_otherBox">
+<textarea id="p2_otherNote" placeholder="Other side details..."></textarea>
+</div>
 
-<button onclick="order('Car Logo Keychain','p2')">Order on WhatsApp</button>
+<label>Main engraving</label>
+<textarea id="p2_note" placeholder="Pet name, phone number..."></textarea>
+
+<button onclick="order(event,'Pet Tag','p2')">Order on WhatsApp</button>
+<button class="pay" onclick="whish(event)">Pay by Whish Money</button>
 </div>
 </div>
 
 <!-- PRODUCT 3 -->
-<div class="product">
+<div class="product" onclick="zoomImg('p3.jpg')">
 <img src="p3.jpg">
 <div class="product-info">
-<h3>Pet Tag</h3>
+<h3>Couples Promise Keychain</h3>
 <div class="price">$10 • Stainless Steel</div>
 
 <label>Quantity</label>
 <input type="number" id="p3_qty" value="1" min="1">
 
-<div class="checkbox">
-<input type="checkbox" id="p3_both">
-<span>Engrave both sides (+$3)</span>
-</div>
+<label>Engraving</label>
+<textarea id="p3_note">Wherever you go, come back to me</textarea>
 
-<label>Engraving details</label>
-<textarea id="p3_note" placeholder="Pet name, phone number..."></textarea>
-
-<button onclick="order('Pet Tag','p3')">Order on WhatsApp</button>
+<button onclick="order(event,'Couples Promise Keychain','p3')">Order on WhatsApp</button>
+<button class="pay" onclick="whish(event)">Pay by Whish Money</button>
 </div>
 </div>
 
 <!-- PRODUCT 4 -->
-<div class="product">
+<div class="product" onclick="zoomImg('p4.jpg')">
 <img src="p4.jpg">
 <div class="product-info">
-<h3>Logo Plate</h3>
-<div class="price">$10 • Stainless Steel</div>
+<h3>Laser Cutting Service</h3>
+<div class="price">Price depends on design</div>
 
-<label>Quantity</label>
-<input type="number" id="p4_qty" value="1" min="1">
+<label>Describe your request</label>
+<textarea id="p4_note" placeholder="Material, size, quantity, file type..."></textarea>
 
-<div class="checkbox">
-<input type="checkbox" id="p4_both">
-<span>Engrave both sides (+$3)</span>
-</div>
-
-<label>Engraving details</label>
-<textarea id="p4_note" placeholder="Logo description..."></textarea>
-
-<button onclick="order('Logo Plate','p4')">Order on WhatsApp</button>
+<button onclick="service(event)">Request on WhatsApp</button>
 </div>
 </div>
 
-<!-- PRODUCT 5 -->
-<div class="product">
-<img src="p5.jpg">
-<div class="product-info">
-<h3>Couple Keychain</h3>
-<div class="price">$10 • Stainless Steel</div>
-
-<label>Quantity</label>
-<input type="number" id="p5_qty" value="1" min="1">
-
-<div class="checkbox">
-<input type="checkbox" id="p5_both">
-<span>Engrave both sides (+$3)</span>
 </div>
 
-<label>Engraving details</label>
-<textarea id="p5_note" placeholder="Names, date..."></textarea>
-
-<button onclick="order('Couple Keychain','p5')">Order on WhatsApp</button>
-</div>
-</div>
-
-<!-- PRODUCT 6 -->
-<div class="product">
-<img src="p6.jpg">
-<div class="product-info">
-<h3>Custom Shape Tag</h3>
-<div class="price">$10 • Stainless Steel</div>
-
-<label>Quantity</label>
-<input type="number" id="p6_qty" value="1" min="1">
-
-<div class="checkbox">
-<input type="checkbox" id="p6_both">
-<span>Engrave both sides (+$3)</span>
-</div>
-
-<label>Engraving details</label>
-<textarea id="p6_note" placeholder="Shape, text, size..."></textarea>
-
-<button onclick="order('Custom Shape Tag','p6')">Order on WhatsApp</button>
-</div>
-</div>
-
+<!-- IMAGE MODAL -->
+<div class="modal" id="modal" onclick="closeModal()">
+<img id="modalImg">
 </div>
 
 <script>
-function order(name,id){
-  let qty = document.getElementById(id+"_qty").value;
-  let both = document.getElementById(id+"_both").checked;
-  let note = document.getElementById(id+"_note").value;
+function zoomImg(src){
+  document.getElementById("modalImg").src=src;
+  document.getElementById("modal").style.display="flex";
+}
+function closeModal(){
+  document.getElementById("modal").style.display="none";
+}
 
-  let total = (10 + (both ? 3 : 0)) * qty;
+function toggleOther(id){
+  document.getElementById(id+"_otherBox").style.display =
+  document.getElementById(id+"_other").checked ? "block":"none";
+}
 
-  let msg =
-`Hello Laser Art LB 👋
+function order(e,name,id){
+  e.stopPropagation();
+  let qty=document.getElementById(id+"_qty").value;
+  let note=document.getElementById(id+"_note").value;
+  let other=document.getElementById(id+"_other")?.checked;
+  let otherNote=document.getElementById(id+"_otherNote")?.value||"";
+
+  let total=(10+(other?3:0))*qty;
+
+  let msg=`Hello Laser Art LB 👋
 
 Product: ${name}
 Quantity: ${qty}
-Engrave both sides: ${both ? "Yes (+$3)" : "No"}
 Total: $${total}
 
-Engraving details:
-${note || "No details"}
+Main engraving:
+${note}
+
+Other side:
+${other?otherNote:"No"}
 
 Payment: Cash on Delivery`;
 
-  window.open(
-    "https://wa.me/96181388115?text=" + encodeURIComponent(msg),
-    "_blank"
-  );
+  window.open("https://wa.me/96181388115?text="+encodeURIComponent(msg));
+}
+
+function service(e){
+  e.stopPropagation();
+  let note=document.getElementById("p4_note").value;
+  window.open("https://wa.me/96181388115?text="+encodeURIComponent(
+    "Hello Laser Art LB 👋\n\nLaser cutting request:\n"+note
+  ));
+}
+
+function whish(e){
+  e.stopPropagation();
+  window.open("https://wa.me/96181388115?text="+encodeURIComponent(
+    "Hello 👋 I want to pay using Whish Money"
+  ));
 }
 </script>
 
