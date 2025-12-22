@@ -4,47 +4,51 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Laser Art LB</title>
-<link rel="icon" type="image/png" href="logo.webp">
 
-
+<link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box}
-
 body{
   margin:0;
   font-family:'Inter',sans-serif;
-  background:#0a0a0a;
+  background:#0b0b0b;
   color:#fff;
 }
 
 header{
   text-align:center;
-  padding:40px 20px;
+  padding:35px 20px 45px;
   border-bottom:1px solid #222;
   position:relative;
 }
 
-header img{width:120px;margin-bottom:15px}
+header img{width:120px;margin-bottom:10px}
+
+.notice{
+  font-size:14px;
+  color:#ccc;
+  margin-bottom:8px;
+}
 
 .socials{
   position:absolute;
   top:20px;
   right:20px;
   display:flex;
-  gap:12px;
+  gap:14px;
 }
 
 .socials img{
   width:26px;
   cursor:pointer;
-  opacity:.8;
+  opacity:.85;
 }
 
 .products{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:25px;
   padding:40px;
   max-width:1200px;
@@ -70,18 +74,24 @@ header img{width:120px;margin-bottom:15px}
 .product-info{padding:18px}
 .price{color:#aaa;margin-top:6px}
 
-/* OVERLAY PRODUCT PAGE */
+/* SERVICES STYLE */
+.service{
+  border:1px solid #333;
+  background:#101010;
+}
+
+/* OVERLAY */
 .overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.9);
+  background:rgba(0,0,0,.92);
   display:none;
   z-index:1000;
   overflow-y:auto;
 }
 
 .overlayContent{
-  max-width:480px;
+  max-width:520px;
   margin:40px auto;
   background:#141414;
   border-radius:22px;
@@ -100,9 +110,9 @@ header img{width:120px;margin-bottom:15px}
 
 .closeBtn{
   position:fixed;
-  top:20px;
-  right:20px;
-  font-size:30px;
+  top:18px;
+  right:22px;
+  font-size:32px;
   cursor:pointer;
 }
 
@@ -136,7 +146,7 @@ textarea{resize:none;min-height:80px}
 
 button{
   width:100%;
-  margin-top:20px;
+  margin-top:18px;
   padding:15px;
   border:none;
   border-radius:30px;
@@ -159,12 +169,13 @@ button{
   </div>
 
   <img src="logo.webp">
+  <div class="notice">Custom stainless steel • Laser engraving & cutting</div>
   <h1>LASER ART LB</h1>
-  <p>Stainless Steel • Laser Engraving</p>
 </header>
 
 <div class="products">
 
+<!-- PRODUCTS -->
 <div class="product" onclick="openProduct('p1')">
   <img src="p1.jpg">
   <div class="product-info">
@@ -192,15 +203,15 @@ button{
 <div class="product" onclick="openProduct('p4')">
   <img src="p4.jpg">
   <div class="product-info">
-    <h3>Laser Cutting Service</h3>
-    <div class="price">Price depends</div>
+    <h3>Custom Logo Keychain</h3>
+    <div class="price">$10</div>
   </div>
 </div>
 
 <div class="product" onclick="openProduct('p5')">
   <img src="p5.jpg">
   <div class="product-info">
-    <h3>Custom Logo Keychain</h3>
+    <h3>Name Keychain</h3>
     <div class="price">$10</div>
   </div>
 </div>
@@ -208,14 +219,31 @@ button{
 <div class="product" onclick="openProduct('p6')">
   <img src="p6.jpg">
   <div class="product-info">
-    <h3>Name Keychain</h3>
+    <h3>Car Logo Keychain</h3>
     <div class="price">$10</div>
+  </div>
+</div>
+
+<!-- SERVICES (BOTTOM) -->
+<div class="product service" onclick="openService('engraving')">
+  <img src="p7.jpg">
+  <div class="product-info">
+    <h3>Laser Engraving Service</h3>
+    <div class="price">Pricing depends</div>
+  </div>
+</div>
+
+<div class="product service" onclick="openService('cutting')">
+  <img src="p8.jpg">
+  <div class="product-info">
+    <h3>Laser Cutting Service</h3>
+    <div class="price">Pricing depends</div>
   </div>
 </div>
 
 </div>
 
-<!-- PRODUCT OVERLAY -->
+<!-- OVERLAY -->
 <div class="overlay" id="overlay">
   <div class="closeBtn" onclick="closeOverlay()">×</div>
   <div class="overlayContent">
@@ -232,72 +260,51 @@ const o_body=document.getElementById("o_body");
 function openProduct(id){
   overlay.style.display="block";
   document.body.style.overflow="hidden";
+  o_img.src=id+".jpg";
 
-  const products={
-    p1:{
-      img:"p1.jpg",
-      html:`<h2>Lebanese Number Plate Keychain</h2>
-      <div class="price">$10</div>
-      <label>Quantity</label><input type="number" value="1">
-      <div class="checkbox">
-        <input type="checkbox" onchange="toggleOther(this)">
-        <span>Engrave on other side (+$3)</span>
-      </div>
-      <div class="otherSide">
-        <textarea placeholder="Other side engraving details"></textarea>
-      </div>
-      <label>Main engraving</label>
-      <textarea placeholder="Plate number, governorate..."></textarea>
-      <button onclick="order('Lebanese Number Plate Keychain')">Buy</button>`
-    },
-    p2:{
-      img:"p2.jpg",
-      html:`<h2>Pet Tag</h2>
-      <div class="price">$10</div>
-      <label>Quantity</label><input type="number" value="1">
-      <label>Engraving</label>
-      <textarea placeholder="Pet name, phone number..."></textarea>
-      <button onclick="order('Pet Tag')">Buy</button>`
-    },
-    p3:{
-      img:"p3.jpg",
-      html:`<h2>Couples Promise Keychain</h2>
-      <div class="price">$10</div>
-      <label>Engraving</label>
-      <textarea>Wherever you go, come back to me</textarea>
-      <button onclick="order('Couples Promise Keychain')">Buy</button>`
-    },
-    p4:{
-      img:"p4.jpg",
-      html:`<h2>Laser Cutting Service</h2>
-      <label>Describe your request</label>
-      <textarea placeholder="Material, size, quantity, file type..."></textarea>
-      <button onclick="order('Laser Cutting Service')">Contact</button>`
-    },
-    p5:{
-      img:"p5.jpg",
-      html:`<h2>Custom Logo Keychain</h2>
-      <div class="price">$10</div>
-      <textarea placeholder="Describe your logo..."></textarea>
-      <button onclick="order('Custom Logo Keychain')">Buy</button>`
-    },
-    p6:{
-      img:"p6.jpg",
-      html:`<h2>Name Keychain</h2>
-      <div class="price">$10</div>
-      <textarea placeholder="Enter name..."></textarea>
-      <button onclick="order('Name Keychain')">Buy</button>`
-    }
-  };
+  const name=document.querySelector(`[onclick="openProduct('${id}')"] h3`).innerText;
 
-  o_img.src=products[id].img;
-  o_body.innerHTML=products[id].html;
+  o_body.innerHTML=`
+    <h2>${name}</h2>
+    <label>Quantity</label>
+    <input type="number" id="qty" value="1" min="1">
+
+    <label>Main engraving</label>
+    <textarea id="note" placeholder="Enter engraving details"></textarea>
+
+    <div class="checkbox">
+      <input type="checkbox" onchange="toggleOther(this)">
+      <span>Engrave on other side (+$3)</span>
+    </div>
+
+    <div class="otherSide">
+      <textarea id="other" placeholder="Other side engraving details"></textarea>
+    </div>
+
+    <button onclick="sendOrder('${name}')">Order via WhatsApp</button>
+  `;
+}
+
+function openService(type){
+  overlay.style.display="block";
+  document.body.style.overflow="hidden";
+  o_img.src= type==="engraving" ? "p7.jpg" : "p8.jpg";
+
+  const title = type==="engraving" ? "Laser Engraving Service" : "Laser Cutting Service";
+
+  o_body.innerHTML=`
+    <h2>${title}</h2>
+    <p class="price">Pricing depends</p>
+
+    <textarea id="note" placeholder="Describe your request (material, size, quantity...)"></textarea>
+
+    <button onclick="sendOrder('${title}')">Contact via WhatsApp</button>
+  `;
 }
 
 function toggleOther(box){
-  box.closest(".overlayBody")
-     .querySelector(".otherSide").style.display =
-     box.checked ? "block" : "none";
+  box.closest(".overlayBody").querySelector(".otherSide").style.display =
+    box.checked ? "block" : "none";
 }
 
 function closeOverlay(){
@@ -305,21 +312,28 @@ function closeOverlay(){
   document.body.style.overflow="auto";
 }
 
-function order(name){
-  window.open(
-    "https://wa.me/96181388115?text="+encodeURIComponent(
-      "Hello Laser Art LB 👋\n\nProduct: "+name
-    )
-  );
+function sendOrder(product){
+  const qty=document.getElementById("qty")?.value || 1;
+  const note=document.getElementById("note")?.value || "";
+  const other=document.getElementById("other")?.value || "No";
+
+  const msg=`Hello Laser Art LB 👋
+
+Product: ${product}
+Quantity: ${qty}
+
+Main engraving:
+${note}
+
+Other side:
+${other}
+`;
+
+  window.open("https://wa.me/96181388115?text="+encodeURIComponent(msg),"_blank");
 }
 
-function openWA(){
-  window.open("https://wa.me/96181388115","_blank");
-}
-
-function openIG(){
-  window.open("https://instagram.com/laserart.lb","_blank");
-}
+function openWA(){window.open("https://wa.me/96181388115","_blank")}
+function openIG(){window.open("https://instagram.com/laserart.lb","_blank")}
 </script>
 
 </body>
