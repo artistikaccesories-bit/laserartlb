@@ -31,7 +31,7 @@ header img{width:120px;margin-bottom:10px}
 .notice{
   font-size:14px;
   color:#ccc;
-  margin-bottom:8px;
+  margin:8px 0;
 }
 
 .socials{
@@ -73,6 +73,11 @@ header img{width:120px;margin-bottom:10px}
   height:220px;
   object-fit:cover;
   background:#0f0f0f;
+  transition:.4s;
+}
+
+.product:hover img{
+  transform:scale(1.05);
 }
 
 .product-info{padding:18px}
@@ -101,10 +106,40 @@ header img{width:120px;margin-bottom:10px}
   letter-spacing:1px;
 }
 
+.comingSoon{
+  cursor:default;
+  pointer-events:none;
+}
+
 /* SERVICES */
 .service{
   background:#101010;
   border:1px solid #333;
+}
+
+/* WHY SECTION */
+.why{
+  max-width:1000px;
+  margin:20px auto 40px;
+  padding:20px;
+  text-align:center;
+}
+
+.why h2{margin-bottom:10px}
+
+.why ul{
+  list-style:none;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:12px;
+}
+
+.why li{
+  background:#141414;
+  padding:14px;
+  border-radius:14px;
+  font-size:14px;
 }
 
 /* OVERLAY */
@@ -169,12 +204,6 @@ textarea{resize:none;min-height:80px}
   margin-top:14px;
 }
 
-.checkbox input{
-  width:auto;
-  margin:0;
-  accent-color:#aaa;
-}
-
 .checkbox span{
   font-size:14px;
   color:#ccc;
@@ -194,6 +223,19 @@ button{
   font-weight:800;
   cursor:pointer;
 }
+
+/* FLOATING WHATSAPP */
+.wa-float{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25d366;
+  color:#fff;
+  font-size:26px;
+  padding:16px;
+  border-radius:50%;
+  text-decoration:none;
+}
 </style>
 </head>
 
@@ -207,12 +249,23 @@ button{
 
   <img src="logo.webp">
   <div class="notice">Custom stainless steel • Laser engraving & cutting</div>
+  <div class="notice">🚚 Cash on Delivery • Delivery all over Lebanon via Wakilni</div>
   <h1>LASER ART LB</h1>
 </header>
 
+<section class="why">
+  <h2>Why Choose Laser Art LB?</h2>
+  <ul>
+    <li>✔ Stainless steel – won’t rust</li>
+    <li>✔ Precision laser engraving</li>
+    <li>✔ Fast production</li>
+    <li>✔ Cash on delivery</li>
+  </ul>
+</section>
+
 <div class="products">
 
-<!-- 1–6 REAL PRODUCTS -->
+<!-- REAL PRODUCTS -->
 <div class="product" onclick="openProduct('p1','Lebanese Number Plate Keychain','Custom Lebanese number plate design.')">
   <img src="p1.jpg">
   <div class="product-info"><h3>Lebanese Number Plate Keychain</h3><p>Custom Lebanese number plate design.</p><div class="price">$10</div></div>
@@ -223,47 +276,10 @@ button{
   <div class="product-info"><h3>Pet Tag</h3><p>Durable stainless steel pet tag.</p><div class="price">$10</div></div>
 </div>
 
-<div class="product" onclick="openProduct('p3','Couples Promise Keychain','Meaningful engraved gift for couples.')">
-  <img src="p3.jpg">
-  <div class="product-info"><h3>Couples Promise Keychain</h3><p>Meaningful engraved gift for couples.</p><div class="price">$10</div></div>
-</div>
-
-<div class="product" onclick="openProduct('p4','Custom Logo Keychain','Your logo engraved on steel.')">
-  <img src="p4.jpg">
-  <div class="product-info"><h3>Custom Logo Keychain</h3><p>Your logo engraved on steel.</p><div class="price">$10</div></div>
-</div>
-
-<div class="product" onclick="openProduct('p5','Name Keychain','Personalized name engraving.')">
-  <img src="p5.jpg">
-  <div class="product-info"><h3>Name Keychain</h3><p>Personalized name engraving.</p><div class="price">$10</div></div>
-</div>
-
-<div class="product" onclick="openProduct('p6','Car Logo Keychain','Car brand logo engraving.')">
-  <img src="p6.jpg">
-  <div class="product-info"><h3>Car Logo Keychain</h3><p>Car brand logo engraving.</p><div class="price">$10</div></div>
-</div>
-
-<!-- 7–15 COMING SOON -->
-<div class="product"><div class="coming">COMING SOON</div><div class="product-info"><h3>New Product</h3><p>More designs coming soon.</p></div></div>
-<div class="product"><div class="coming">COMING SOON</div><div class="product-info"><h3>New Product</h3><p>More designs coming soon.</p></div></div>
-<div class="product"><div class="coming">COMING SOON</div><div class="product-info"><h3>New Product</h3><p>More designs coming soon.</p></div></div>
-<div class="product"><div class="coming">COMING SOON</div><div class="product-info"><h3>New Product</h3><p>More designs coming soon.</p></div></div>
-<div class="product"><div class="coming">COMING SOON</div><div class="product-info"><h3>New Product</h3><p>More designs coming soon.</p></div></div>
-<div class="product"><div class="coming">COMING SOON</div><div class="product-info"><h3>New Product</h3><p>More designs coming soon.</p></div></div>
-<div class="product"><div class="coming">COMING SOON</div><div class="product-info"><h3>New Product</h3><p>More designs coming soon.</p></div></div>
-<div class="product"><div class="coming">COMING SOON</div><div class="product-info"><h3>New Product</h3><p>More designs coming soon.</p></div></div>
-<div class="product"><div class="coming">COMING SOON</div><div class="product-info"><h3>New Product</h3><p>More designs coming soon.</p></div></div>
-
-<!-- SERVICES -->
-<div class="product service" onclick="openService('Laser Engraving Service','Professional engraving on various materials.')">
-  <img src="p7.jpg">
-  <div class="product-info"><h3>Laser Engraving Service</h3><p>Professional engraving on various materials.</p><div class="price">Pricing depends</div></div>
-</div>
-
-<div class="product service" onclick="openService('Laser Cutting Service','Precision laser cutting services.')">
-  <img src="p8.jpg">
-  <div class="product-info"><h3>Laser Cutting Service</h3><p>Precision laser cutting services.</p><div class="price">Pricing depends</div></div>
-</div>
+<!-- COMING SOON -->
+<div class="product comingSoon"><div class="coming">COMING SOON</div><div class="product-info"><h3>New Product</h3><p>More designs coming soon.</p></div></div>
+<div class="product comingSoon"><div class="coming">COMING SOON</div><div class="product-info"><h3>New Product</h3><p>More designs coming soon.</p></div></div>
+<div class="product comingSoon"><div class="coming">COMING SOON</div><div class="product-info"><h3>New Product</h3><p>More designs coming soon.</p></div></div>
 
 </div>
 
@@ -275,6 +291,8 @@ button{
     <div class="overlayBody" id="o_body"></div>
   </div>
 </div>
+
+<a class="wa-float" href="https://wa.me/96181388115" target="_blank">💬</a>
 
 <script>
 const overlay=document.getElementById("overlay");
@@ -289,6 +307,7 @@ function openProduct(id,name,desc){
   o_body.innerHTML=`
     <h2>${name}</h2>
     <p class="price">${desc}</p>
+    <p style="font-size:13px;color:#aaa">⏱ Production 1–2 days • Delivery 24–48h</p>
 
     <label>Quantity</label>
     <input type="number" id="qty" value="1" min="1">
@@ -306,19 +325,6 @@ function openProduct(id,name,desc){
     </div>
 
     <button onclick="sendOrder('${name}')">Order via WhatsApp</button>
-  `;
-}
-
-function openService(title,desc){
-  overlay.style.display="block";
-  document.body.style.overflow="hidden";
-  o_img.src= title.includes("Engraving") ? "p7.jpg" : "p8.jpg";
-
-  o_body.innerHTML=`
-    <h2>${title}</h2>
-    <p class="price">${desc}</p>
-    <textarea id="note" placeholder="Describe your request"></textarea>
-    <button onclick="sendOrder('${title}')">Contact via WhatsApp</button>
   `;
 }
 
