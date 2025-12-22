@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Laser Art LB</title>
 
-<link rel="icon" type="image/png" href="favicon.png">
+<!-- FAVICON -->
+<link rel="icon" type="image/png" href="logo.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
@@ -26,12 +28,15 @@ header{
   position:relative;
 }
 
-header img{width:120px;margin-bottom:10px}
+header img{
+  width:120px;
+  margin-bottom:10px;
+}
 
 .notice{
   font-size:14px;
   color:#ccc;
-  margin:8px 0;
+  margin:6px 0;
 }
 
 .socials{
@@ -48,12 +53,38 @@ header img{width:120px;margin-bottom:10px}
   opacity:.85;
 }
 
-/* GRID */
+/* WHY CHOOSE US */
+.why{
+  max-width:1100px;
+  margin:30px auto 10px;
+  padding:0 20px;
+  text-align:center;
+}
+
+.why h2{
+  margin-bottom:16px;
+}
+
+.why-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
+
+.why-box{
+  background:#141414;
+  padding:16px;
+  border-radius:14px;
+  font-size:14px;
+  color:#ddd;
+}
+
+/* PRODUCTS GRID */
 .products{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:25px;
-  padding:40px;
+  padding:40px 20px;
   max-width:1200px;
   margin:auto;
 }
@@ -76,9 +107,7 @@ header img{width:120px;margin-bottom:10px}
   transition:.4s;
 }
 
-.product:hover img{
-  transform:scale(1.05);
-}
+.product:hover img{transform:scale(1.05)}
 
 .product-info{padding:18px}
 
@@ -96,10 +125,10 @@ header img{width:120px;margin-bottom:10px}
 
 /* COMING SOON */
 .coming{
+  height:220px;
   display:flex;
   align-items:center;
   justify-content:center;
-  height:220px;
   background:#101010;
   color:#777;
   font-weight:600;
@@ -107,39 +136,8 @@ header img{width:120px;margin-bottom:10px}
 }
 
 .comingSoon{
-  cursor:default;
   pointer-events:none;
-}
-
-/* SERVICES */
-.service{
-  background:#101010;
-  border:1px solid #333;
-}
-
-/* WHY SECTION */
-.why{
-  max-width:1000px;
-  margin:20px auto 40px;
-  padding:20px;
-  text-align:center;
-}
-
-.why h2{margin-bottom:10px}
-
-.why ul{
-  list-style:none;
-  padding:0;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:12px;
-}
-
-.why li{
-  background:#141414;
-  padding:14px;
-  border-radius:14px;
-  font-size:14px;
+  cursor:default;
 }
 
 /* OVERLAY */
@@ -149,7 +147,6 @@ header img{width:120px;margin-bottom:10px}
   background:rgba(0,0,0,.92);
   display:none;
   z-index:1000;
-  overflow-y:auto;
 }
 
 .overlayContent{
@@ -196,17 +193,11 @@ input[type="number"], textarea{
 
 textarea{resize:none;min-height:80px}
 
-/* CHECKBOX */
 .checkbox{
   display:flex;
   align-items:center;
   gap:8px;
   margin-top:14px;
-}
-
-.checkbox span{
-  font-size:14px;
-  color:#ccc;
 }
 
 .otherSide{display:none;margin-top:10px}
@@ -224,17 +215,22 @@ button{
   cursor:pointer;
 }
 
-/* FLOATING WHATSAPP */
+/* WHATSAPP FLOATING */
 .wa-float{
   position:fixed;
   bottom:20px;
   right:20px;
   background:#25d366;
-  color:#fff;
-  font-size:26px;
-  padding:16px;
+  color:white;
+  width:60px;
+  height:60px;
   border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
   text-decoration:none;
+  z-index:2000;
 }
 </style>
 </head>
@@ -247,20 +243,21 @@ button{
     <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" onclick="openIG()">
   </div>
 
-  <img src="logo.webp">
+  <img src="logo.png">
   <div class="notice">Custom stainless steel • Laser engraving & cutting</div>
   <div class="notice">🚚 Cash on Delivery • Delivery all over Lebanon via Wakilni</div>
   <h1>LASER ART LB</h1>
 </header>
 
+<!-- WHY CHOOSE US -->
 <section class="why">
   <h2>Why Choose Laser Art LB?</h2>
-  <ul>
-    <li>✔ Stainless steel – won’t rust</li>
-    <li>✔ Precision laser engraving</li>
-    <li>✔ Fast production</li>
-    <li>✔ Cash on delivery</li>
-  </ul>
+  <div class="why-grid">
+    <div class="why-box">✔ Stainless steel – won’t rust</div>
+    <div class="why-box">✔ Precision laser engraving</div>
+    <div class="why-box">✔ Fast production</div>
+    <div class="why-box">✔ Cash on delivery</div>
+  </div>
 </section>
 
 <div class="products">
@@ -268,18 +265,38 @@ button{
 <!-- REAL PRODUCTS -->
 <div class="product" onclick="openProduct('p1','Lebanese Number Plate Keychain','Custom Lebanese number plate design.')">
   <img src="p1.jpg">
-  <div class="product-info"><h3>Lebanese Number Plate Keychain</h3><p>Custom Lebanese number plate design.</p><div class="price">$10</div></div>
+  <div class="product-info">
+    <h3>Lebanese Number Plate Keychain</h3>
+    <p>Custom Lebanese number plate design.</p>
+    <div class="price">$10</div>
+  </div>
 </div>
 
 <div class="product" onclick="openProduct('p2','Pet Tag','Durable stainless steel pet tag.')">
   <img src="p2.jpg">
-  <div class="product-info"><h3>Pet Tag</h3><p>Durable stainless steel pet tag.</p><div class="price">$10</div></div>
+  <div class="product-info">
+    <h3>Pet Tag</h3>
+    <p>Durable stainless steel pet tag.</p>
+    <div class="price">$10</div>
+  </div>
 </div>
 
 <!-- COMING SOON -->
-<div class="product comingSoon"><div class="coming">COMING SOON</div><div class="product-info"><h3>New Product</h3><p>More designs coming soon.</p></div></div>
-<div class="product comingSoon"><div class="coming">COMING SOON</div><div class="product-info"><h3>New Product</h3><p>More designs coming soon.</p></div></div>
-<div class="product comingSoon"><div class="coming">COMING SOON</div><div class="product-info"><h3>New Product</h3><p>More designs coming soon.</p></div></div>
+<div class="product comingSoon">
+  <div class="coming">COMING SOON</div>
+  <div class="product-info">
+    <h3>New Product</h3>
+    <p>More designs coming soon.</p>
+  </div>
+</div>
+
+<div class="product comingSoon">
+  <div class="coming">COMING SOON</div>
+  <div class="product-info">
+    <h3>New Product</h3>
+    <p>More designs coming soon.</p>
+  </div>
+</div>
 
 </div>
 
@@ -292,6 +309,7 @@ button{
   </div>
 </div>
 
+<!-- WHATSAPP FLOATING BUTTON -->
 <a class="wa-float" href="https://wa.me/96181388115" target="_blank">💬</a>
 
 <script>
@@ -301,61 +319,24 @@ const o_body=document.getElementById("o_body");
 
 function openProduct(id,name,desc){
   overlay.style.display="block";
-  document.body.style.overflow="hidden";
   o_img.src=id+".jpg";
-
   o_body.innerHTML=`
     <h2>${name}</h2>
     <p class="price">${desc}</p>
-    <p style="font-size:13px;color:#aaa">⏱ Production 1–2 days • Delivery 24–48h</p>
-
     <label>Quantity</label>
-    <input type="number" id="qty" value="1" min="1">
-
+    <input type="number" value="1" min="1">
     <label>Main engraving</label>
-    <textarea id="note"></textarea>
-
-    <div class="checkbox">
-      <input type="checkbox" onchange="toggleOther(this)">
-      <span>Engrave on other side (+$3)</span>
-    </div>
-
-    <div class="otherSide">
-      <textarea id="other" placeholder="Other side engraving"></textarea>
-    </div>
-
+    <textarea></textarea>
     <button onclick="sendOrder('${name}')">Order via WhatsApp</button>
   `;
 }
 
-function toggleOther(box){
-  box.closest(".overlayBody").querySelector(".otherSide").style.display =
-    box.checked ? "block" : "none";
-}
-
 function closeOverlay(){
   overlay.style.display="none";
-  document.body.style.overflow="auto";
 }
 
 function sendOrder(product){
-  const qty=document.getElementById("qty")?.value || 1;
-  const note=document.getElementById("note")?.value || "";
-  const other=document.getElementById("other")?.value || "No";
-
-  const msg=`Hello Laser Art LB 👋
-
-Product: ${product}
-Quantity: ${qty}
-
-Main engraving:
-${note}
-
-Other side:
-${other}
-`;
-
-  window.open("https://wa.me/96181388115?text="+encodeURIComponent(msg),"_blank");
+  window.open("https://wa.me/96181388115?text="+encodeURIComponent("Hello Laser Art LB 👋\nProduct: "+product),"_blank");
 }
 
 function openWA(){window.open("https://wa.me/96181388115","_blank")}
