@@ -21,9 +21,24 @@ header{
   text-align:center;
   padding:40px 20px;
   border-bottom:1px solid #222;
+  position:relative;
 }
 
 header img{width:120px;margin-bottom:15px}
+
+.socials{
+  position:absolute;
+  top:20px;
+  right:20px;
+  display:flex;
+  gap:12px;
+}
+
+.socials img{
+  width:26px;
+  cursor:pointer;
+  opacity:.8;
+}
 
 .products{
   display:grid;
@@ -85,9 +100,8 @@ header img{width:120px;margin-bottom:15px}
   position:fixed;
   top:20px;
   right:20px;
-  font-size:28px;
+  font-size:30px;
   cursor:pointer;
-  color:#fff;
 }
 
 label{
@@ -135,6 +149,13 @@ button{
 <body>
 
 <header>
+  <div class="socials">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg"
+         onclick="openWA()">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"
+         onclick="openIG()">
+  </div>
+
   <img src="logo.webp">
   <h1>LASER ART LB</h1>
   <p>Stainless Steel • Laser Engraving</p>
@@ -154,6 +175,38 @@ button{
   <img src="p2.jpg">
   <div class="product-info">
     <h3>Pet Tag</h3>
+    <div class="price">$10</div>
+  </div>
+</div>
+
+<div class="product" onclick="openProduct('p3')">
+  <img src="p3.jpg">
+  <div class="product-info">
+    <h3>Couples Promise Keychain</h3>
+    <div class="price">$10</div>
+  </div>
+</div>
+
+<div class="product" onclick="openProduct('p4')">
+  <img src="p4.jpg">
+  <div class="product-info">
+    <h3>Laser Cutting Service</h3>
+    <div class="price">Price depends</div>
+  </div>
+</div>
+
+<div class="product" onclick="openProduct('p5')">
+  <img src="p5.jpg">
+  <div class="product-info">
+    <h3>Custom Logo Keychain</h3>
+    <div class="price">$10</div>
+  </div>
+</div>
+
+<div class="product" onclick="openProduct('p6')">
+  <img src="p6.jpg">
+  <div class="product-info">
+    <h3>Name Keychain</h3>
     <div class="price">$10</div>
   </div>
 </div>
@@ -178,46 +231,65 @@ function openProduct(id){
   overlay.style.display="block";
   document.body.style.overflow="hidden";
 
-  if(id==="p1"){
-    o_img.src="p1.jpg";
-    o_body.innerHTML=`
-      <h2>Lebanese Number Plate Keychain</h2>
+  const products={
+    p1:{
+      img:"p1.jpg",
+      html:`<h2>Lebanese Number Plate Keychain</h2>
       <div class="price">$10</div>
-
-      <label>Quantity</label>
-      <input type="number" value="1" min="1">
-
+      <label>Quantity</label><input type="number" value="1">
       <div class="checkbox">
         <input type="checkbox" onchange="toggleOther(this)">
         <span>Engrave on other side (+$3)</span>
       </div>
-
       <div class="otherSide">
         <textarea placeholder="Other side engraving details"></textarea>
       </div>
-
       <label>Main engraving</label>
       <textarea placeholder="Plate number, governorate..."></textarea>
-
-      <button onclick="order('Lebanese Number Plate Keychain')">Buy</button>
-    `;
-  }
-
-  if(id==="p2"){
-    o_img.src="p2.jpg";
-    o_body.innerHTML=`
-      <h2>Pet Tag</h2>
+      <button onclick="order('Lebanese Number Plate Keychain')">Buy</button>`
+    },
+    p2:{
+      img:"p2.jpg",
+      html:`<h2>Pet Tag</h2>
       <div class="price">$10</div>
-
-      <label>Quantity</label>
-      <input type="number" value="1">
-
+      <label>Quantity</label><input type="number" value="1">
       <label>Engraving</label>
       <textarea placeholder="Pet name, phone number..."></textarea>
+      <button onclick="order('Pet Tag')">Buy</button>`
+    },
+    p3:{
+      img:"p3.jpg",
+      html:`<h2>Couples Promise Keychain</h2>
+      <div class="price">$10</div>
+      <label>Engraving</label>
+      <textarea>Wherever you go, come back to me</textarea>
+      <button onclick="order('Couples Promise Keychain')">Buy</button>`
+    },
+    p4:{
+      img:"p4.jpg",
+      html:`<h2>Laser Cutting Service</h2>
+      <label>Describe your request</label>
+      <textarea placeholder="Material, size, quantity, file type..."></textarea>
+      <button onclick="order('Laser Cutting Service')">Contact</button>`
+    },
+    p5:{
+      img:"p5.jpg",
+      html:`<h2>Custom Logo Keychain</h2>
+      <div class="price">$10</div>
+      <textarea placeholder="Describe your logo..."></textarea>
+      <button onclick="order('Custom Logo Keychain')">Buy</button>`
+    },
+    p6:{
+      img:"p6.jpg",
+      html:`<h2>Name Keychain</h2>
+      <div class="price">$10</div>
+      <textarea placeholder="Enter name..."></textarea>
+      <button onclick="order('Name Keychain')">Buy</button>`
+    }
+  };
 
-      <button onclick="order('Pet Tag')">Buy</button>
-    `;
-  }
+  o_img.src=products[id].img;
+  o_body.innerHTML=products[id].html;
 }
 
 function toggleOther(box){
@@ -237,6 +309,14 @@ function order(name){
       "Hello Laser Art LB 👋\n\nProduct: "+name
     )
   );
+}
+
+function openWA(){
+  window.open("https://wa.me/96181388115","_blank");
+}
+
+function openIG(){
+  window.open("https://instagram.com/laserart.lb","_blank");
 }
 </script>
 
