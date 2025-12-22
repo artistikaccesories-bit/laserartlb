@@ -13,78 +13,177 @@
 body{margin:0;font-family:'Inter',sans-serif;background:#0b0b0b;color:#fff}
 
 /* HEADER */
-header{text-align:center;padding:35px 20px 45px;border-bottom:1px solid #222;position:relative}
+header{
+  text-align:center;
+  padding:35px 20px 45px;
+  border-bottom:1px solid #222;
+  position:relative;
+}
 header img{width:120px;margin-bottom:10px}
 .notice{font-size:14px;color:#ccc;margin:6px 0}
-.socials{position:absolute;top:20px;right:20px;display:flex;gap:14px}
-.socials img{width:26px;cursor:pointer}
+
+/* SOCIAL BUTTONS */
+.socials{
+  position:absolute;
+  top:20px;
+  right:20px;
+  display:flex;
+  gap:12px;
+}
+.socials button{
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+.socials img{width:26px}
 
 /* WHY */
 .why{max-width:1100px;margin:30px auto;padding:0 20px;text-align:center}
-.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}
-.why-box{background:#141414;padding:16px;border-radius:14px;font-size:14px}
+.why-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px
+}
+.why-box{
+  background:#141414;
+  padding:16px;
+  border-radius:14px;
+  font-size:14px
+}
 
 /* PRODUCTS */
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;padding:40px 20px;max-width:1200px;margin:auto}
-.product{background:#151515;border-radius:18px;overflow:hidden;cursor:pointer;transition:.3s}
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+  padding:40px 20px;
+  max-width:1200px;
+  margin:auto
+}
+.product{
+  background:#151515;
+  border-radius:18px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.3s;
+}
 .product:hover{transform:translateY(-6px)}
-.product img{width:100%;height:220px;object-fit:cover}
+.product img{
+  width:100%;
+  height:220px;
+  object-fit:cover
+}
 .product-info{padding:18px}
-.product-info p{font-size:13px;color:#bbb;margin:6px 0 0}
+.product-info p{font-size:13px;color:#bbb;margin:6px 0}
 .price{color:#aaa;font-size:14px}
 
 /* COMING SOON */
-.coming{height:220px;display:flex;align-items:center;justify-content:center;background:#101010;color:#777;font-weight:600}
-.comingSoon{pointer-events:none}
-
-/* LOAD MORE */
-.hidden{display:none}
-.loadMore{text-align:center;margin-bottom:40px}
-.loadMore button{
-  padding:14px 28px;border:none;border-radius:30px;
-  background:linear-gradient(135deg,#777,#aaa);
-  font-weight:800;cursor:pointer
+.coming{
+  height:220px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#101010;
+  color:#777;
+  font-weight:600
+}
+.comingSoon{
+  pointer-events:none;
+  cursor:default;
 }
 
 /* OVERLAY */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;z-index:1000}
-.overlayContent{max-width:520px;margin:40px auto;background:#141414;border-radius:22px;overflow:hidden}
-.overlayContent img{width:100%;height:280px;object-fit:cover}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  display:none;
+  z-index:9999;
+}
+.overlayContent{
+  max-width:520px;
+  margin:40px auto;
+  background:#141414;
+  border-radius:22px;
+  overflow:hidden
+}
+.overlayContent img{
+  width:100%;
+  height:280px;
+  object-fit:cover
+}
 .overlayBody{padding:22px}
-.closeBtn{position:fixed;top:18px;right:22px;font-size:32px;cursor:pointer}
+.closeBtn{
+  position:fixed;
+  top:18px;
+  right:22px;
+  font-size:32px;
+  cursor:pointer
+}
 
 /* FORM */
-label{display:block;margin-top:14px;color:#aaa;font-size:14px}
+label{
+  display:block;
+  margin-top:14px;
+  color:#aaa;
+  font-size:14px
+}
 input[type="number"],textarea{
-  width:100%;background:#0f0f0f;border:1px solid #333;color:#fff;
-  padding:10px;border-radius:10px;margin-top:6px
+  width:100%;
+  background:#0f0f0f;
+  border:1px solid #333;
+  color:#fff;
+  padding:10px;
+  border-radius:10px;
+  margin-top:6px
 }
 textarea{resize:none;min-height:80px}
 
 /* CHECKBOX */
-.checkbox{display:flex;align-items:center;gap:8px;margin-top:14px}
+.checkbox{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:14px
+}
 .otherSide{display:none;margin-top:10px}
 
 /* TOTAL */
 .total{
   margin-top:14px;
   font-size:16px;
-  font-weight:700;
-  color:#fff;
+  font-weight:700
 }
 
 /* BUTTON */
-button{
-  width:100%;margin-top:18px;padding:15px;border:none;border-radius:30px;
-  background:linear-gradient(135deg,#777,#aaa);color:#000;font-weight:800;cursor:pointer
+button.orderBtn{
+  width:100%;
+  margin-top:18px;
+  padding:15px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#777,#aaa);
+  color:#000;
+  font-weight:800;
+  cursor:pointer
 }
 
 /* WHATSAPP FLOAT */
 .wa-float{
-  position:fixed;bottom:20px;right:20px;background:#25d366;color:#fff;
-  width:60px;height:60px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:28px;text-decoration:none;z-index:2000
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25d366;
+  color:#fff;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  text-decoration:none;
+  z-index:2000
 }
 </style>
 </head>
@@ -93,8 +192,12 @@ button{
 
 <header>
   <div class="socials">
-    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" onclick="openWA()">
-    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" onclick="openIG()">
+    <button onclick="openWA()">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg">
+    </button>
+    <button onclick="openIG()">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg">
+    </button>
   </div>
 
   <img src="logo.png">
@@ -117,22 +220,43 @@ button{
 
 <div class="product" onclick="openProduct('p1','Lebanese Number Plate Keychain',10)">
   <img src="p1.jpg">
-  <div class="product-info"><h3>Lebanese Number Plate</h3><p>Custom design</p><div class="price">$10</div></div>
+  <div class="product-info">
+    <h3>Lebanese Number Plate</h3>
+    <p>Custom design</p>
+    <div class="price">$10</div>
+  </div>
 </div>
 
 <div class="product" onclick="openProduct('p2','Pet Tag',10)">
   <img src="p2.jpg">
-  <div class="product-info"><h3>Pet Tag</h3><p>Stainless steel</p><div class="price">$10</div></div>
+  <div class="product-info">
+    <h3>Pet Tag</h3>
+    <p>Stainless steel</p>
+    <div class="price">$10</div>
+  </div>
 </div>
 
 <div class="product" onclick="openProduct('p3','Couple Keychain',10)">
   <img src="p3.jpg">
-  <div class="product-info"><h3>Couple Keychain</h3><p>Engraved gift</p><div class="price">$10</div></div>
+  <div class="product-info">
+    <h3>Couple Keychain</h3>
+    <p>Engraved gift</p>
+    <div class="price">$10</div>
+  </div>
 </div>
 
 <div class="product" onclick="openProduct('p4','Name Keychain',10)">
   <img src="p4.jpg">
-  <div class="product-info"><h3>Name Keychain</h3><p>Personalized</p><div class="price">$10</div></div>
+  <div class="product-info">
+    <h3>Name Keychain</h3>
+    <p>Personalized</p>
+    <div class="price">$10</div>
+  </div>
+</div>
+
+<div class="product comingSoon">
+  <div class="coming">COMING SOON</div>
+  <div class="product-info"><h3>New Product</h3></div>
 </div>
 
 </div>
@@ -150,18 +274,17 @@ button{
 
 <script>
 let basePrice = 0;
-
-const overlay=document.getElementById("overlay");
-const o_img=document.getElementById("o_img");
-const o_body=document.getElementById("o_body");
+const overlay = document.getElementById("overlay");
+const o_img = document.getElementById("o_img");
+const o_body = document.getElementById("o_body");
 
 function openProduct(id,name,price){
   basePrice = price;
-  overlay.style.display="block";
-  document.body.style.overflow="hidden";
-  o_img.src=id+".jpg";
+  overlay.style.display = "block";
+  document.body.style.overflow = "hidden";
+  o_img.src = id + ".jpg";
 
-  o_body.innerHTML=`
+  o_body.innerHTML = `
     <h2>${name}</h2>
     <p class="price">Base price: $${price}</p>
 
@@ -183,20 +306,21 @@ function openProduct(id,name,price){
 
     <div class="total" id="totalPrice">Total: $${price}</div>
 
-    <button onclick="sendOrder('${name}')">Order via WhatsApp</button>
+    <button class="orderBtn" onclick="sendOrder('${name}')">Order via WhatsApp</button>
   `;
 }
 
 function updateTotal(){
   const qty = Number(document.getElementById("qty").value) || 1;
-  const other = document.getElementById("otherCheck").checked ? 3 : 0;
-  const total = (basePrice + other) * qty;
-  document.getElementById("totalPrice").innerText = "Total: $" + total;
+  const extra = document.getElementById("otherCheck").checked ? 3 : 0;
+  document.getElementById("totalPrice").innerText =
+    "Total: $" + ((basePrice + extra) * qty);
 }
 
 function toggleOther(box){
-  box.closest(".overlayBody").querySelector(".otherSide").style.display =
-    box.checked ? "block" : "none";
+  box.closest(".overlayBody")
+     .querySelector(".otherSide").style.display =
+     box.checked ? "block" : "none";
 }
 
 function closeOverlay(){
@@ -205,30 +329,37 @@ function closeOverlay(){
 }
 
 function sendOrder(product){
-  const qty=document.getElementById("qty").value;
-  const note=document.getElementById("note").value || "—";
-  const otherChecked=document.getElementById("otherCheck").checked;
-  const otherText=otherChecked ? document.getElementById("other").value || "Yes" : "No";
-  const total=document.getElementById("totalPrice").innerText.replace("Total: ","");
+  const qty = document.getElementById("qty").value;
+  const note = document.getElementById("note").value || "—";
+  const other = document.getElementById("otherCheck").checked
+    ? document.getElementById("other").value || "Yes"
+    : "No";
+  const total = document.getElementById("totalPrice").innerText;
 
-  const msg=
-`Hello Laser Art LB,
+  const msg = `Hello Laser Art LB,
 
 I would like to place an order:
 
 • Product: ${product}
 • Quantity: ${qty}
 • Main engraving: ${note}
-• Other side engraving: ${otherText}
+• Other side engraving: ${other}
 • ${total}
 
 Thank you.`;
 
-  window.open("https://wa.me/96181388115?text="+encodeURIComponent(msg),"_blank");
+  window.open(
+    "https://wa.me/96181388115?text=" + encodeURIComponent(msg),
+    "_blank"
+  );
 }
 
-function openWA(){window.open("https://wa.me/96181388115","_blank")}
-function openIG(){window.open("https://instagram.com/laserart.lb","_blank")}
+function openWA(){
+  window.open("https://wa.me/96181388115","_blank");
+}
+function openIG(){
+  window.open("https://instagram.com/laserart.lb","_blank");
+}
 </script>
 
 </body>
