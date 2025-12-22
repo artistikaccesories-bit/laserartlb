@@ -51,7 +51,7 @@ header img{width:120px;margin-bottom:10px}
 /* PRODUCTS GRID */
 .products{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:25px;
   padding:40px;
   max-width:1200px;
@@ -75,7 +75,18 @@ header img{width:120px;margin-bottom:10px}
 }
 
 .product-info{padding:18px}
-.price{color:#aaa;margin-top:6px}
+
+.product-info p{
+  font-size:13px;
+  color:#bbb;
+  margin:6px 0 0;
+}
+
+.price{
+  color:#aaa;
+  margin-top:6px;
+  font-size:14px;
+}
 
 /* SERVICES */
 .service{
@@ -119,7 +130,7 @@ header img{width:120px;margin-bottom:10px}
   cursor:pointer;
 }
 
-/* FORM ELEMENTS */
+/* FORM */
 label{
   display:block;
   margin-top:14px;
@@ -142,17 +153,16 @@ textarea{
   min-height:80px;
 }
 
-/* ✅ FIXED CHECKBOX ALIGNMENT */
+/* CHECKBOX FIX */
 .checkbox{
   display:flex;
   align-items:center;
   justify-content:flex-start;
   gap:8px;
   margin-top:14px;
-  width:100%;
 }
 
-.checkbox input[type="checkbox"]{
+.checkbox input{
   width:auto;
   margin:0;
   accent-color:#aaa;
@@ -163,7 +173,6 @@ textarea{
   color:#ccc;
 }
 
-/* OTHER SIDE */
 .otherSide{
   display:none;
   margin-top:10px;
@@ -199,17 +208,79 @@ button{
 
 <div class="products">
 
-<!-- 6 PRODUCTS -->
-<div class="product" onclick="openProduct('p1')"><img src="p1.jpg"><div class="product-info"><h3>Lebanese Number Plate Keychain</h3><div class="price">$10</div></div></div>
-<div class="product" onclick="openProduct('p2')"><img src="p2.jpg"><div class="product-info"><h3>Pet Tag</h3><div class="price">$10</div></div></div>
-<div class="product" onclick="openProduct('p3')"><img src="p3.jpg"><div class="product-info"><h3>Couples Promise Keychain</h3><div class="price">$10</div></div></div>
-<div class="product" onclick="openProduct('p4')"><img src="p4.jpg"><div class="product-info"><h3>Custom Logo Keychain</h3><div class="price">$10</div></div></div>
-<div class="product" onclick="openProduct('p5')"><img src="p5.jpg"><div class="product-info"><h3>Name Keychain</h3><div class="price">$10</div></div></div>
-<div class="product" onclick="openProduct('p6')"><img src="p6.jpg"><div class="product-info"><h3>Car Logo Keychain</h3><div class="price">$10</div></div></div>
+<!-- PRODUCTS -->
+<div class="product" onclick="openProduct('p1','Lebanese Number Plate Keychain','Customizable stainless steel Lebanese number plate keychain.')">
+  <img src="p1.jpg">
+  <div class="product-info">
+    <h3>Lebanese Number Plate Keychain</h3>
+    <p>Customizable stainless steel Lebanese number plate keychain.</p>
+    <div class="price">$10</div>
+  </div>
+</div>
+
+<div class="product" onclick="openProduct('p2','Pet Tag','Durable stainless steel pet tag with custom engraving.')">
+  <img src="p2.jpg">
+  <div class="product-info">
+    <h3>Pet Tag</h3>
+    <p>Durable stainless steel pet tag with custom engraving.</p>
+    <div class="price">$10</div>
+  </div>
+</div>
+
+<div class="product" onclick="openProduct('p3','Couples Promise Keychain','A meaningful engraved keychain for couples.')">
+  <img src="p3.jpg">
+  <div class="product-info">
+    <h3>Couples Promise Keychain</h3>
+    <p>A meaningful engraved keychain for couples.</p>
+    <div class="price">$10</div>
+  </div>
+</div>
+
+<div class="product" onclick="openProduct('p4','Custom Logo Keychain','Turn your logo into a premium stainless steel keychain.')">
+  <img src="p4.jpg">
+  <div class="product-info">
+    <h3>Custom Logo Keychain</h3>
+    <p>Turn your logo into a premium stainless steel keychain.</p>
+    <div class="price">$10</div>
+  </div>
+</div>
+
+<div class="product" onclick="openProduct('p5','Name Keychain','Personalized name keychain in stainless steel.')">
+  <img src="p5.jpg">
+  <div class="product-info">
+    <h3>Name Keychain</h3>
+    <p>Personalized name keychain in stainless steel.</p>
+    <div class="price">$10</div>
+  </div>
+</div>
+
+<div class="product" onclick="openProduct('p6','Car Logo Keychain','Custom car logo engraved on stainless steel.')">
+  <img src="p6.jpg">
+  <div class="product-info">
+    <h3>Car Logo Keychain</h3>
+    <p>Custom car logo engraved on stainless steel.</p>
+    <div class="price">$10</div>
+  </div>
+</div>
 
 <!-- SERVICES -->
-<div class="product service" onclick="openService('engraving')"><img src="p7.jpg"><div class="product-info"><h3>Laser Engraving Service</h3><div class="price">Pricing depends</div></div></div>
-<div class="product service" onclick="openService('cutting')"><img src="p8.jpg"><div class="product-info"><h3>Laser Cutting Service</h3><div class="price">Pricing depends</div></div></div>
+<div class="product service" onclick="openService('Laser Engraving Service','Professional laser engraving on various materials.')">
+  <img src="p7.jpg">
+  <div class="product-info">
+    <h3>Laser Engraving Service</h3>
+    <p>Professional laser engraving on various materials.</p>
+    <div class="price">Pricing depends</div>
+  </div>
+</div>
+
+<div class="product service" onclick="openService('Laser Cutting Service','Precision laser cutting with custom dimensions.')">
+  <img src="p8.jpg">
+  <div class="product-info">
+    <h3>Laser Cutting Service</h3>
+    <p>Precision laser cutting with custom dimensions.</p>
+    <div class="price">Pricing depends</div>
+  </div>
+</div>
 
 </div>
 
@@ -227,15 +298,14 @@ const overlay=document.getElementById("overlay");
 const o_img=document.getElementById("o_img");
 const o_body=document.getElementById("o_body");
 
-function openProduct(id){
+function openProduct(id,name,desc){
   overlay.style.display="block";
   document.body.style.overflow="hidden";
   o_img.src=id+".jpg";
 
-  const name=document.querySelector(`[onclick="openProduct('${id}')"] h3`).innerText;
-
   o_body.innerHTML=`
     <h2>${name}</h2>
+    <p class="price">${desc}</p>
 
     <label>Quantity</label>
     <input type="number" id="qty" value="1" min="1">
@@ -256,16 +326,14 @@ function openProduct(id){
   `;
 }
 
-function openService(type){
+function openService(title,desc){
   overlay.style.display="block";
   document.body.style.overflow="hidden";
-  o_img.src= type==="engraving" ? "p7.jpg" : "p8.jpg";
-
-  const title = type==="engraving" ? "Laser Engraving Service" : "Laser Cutting Service";
+  o_img.src= title.includes("Engraving") ? "p7.jpg" : "p8.jpg";
 
   o_body.innerHTML=`
     <h2>${title}</h2>
-    <p class="price">Pricing depends</p>
+    <p class="price">${desc}</p>
     <textarea id="note" placeholder="Describe your request"></textarea>
     <button onclick="sendOrder('${title}')">Contact via WhatsApp</button>
   `;
