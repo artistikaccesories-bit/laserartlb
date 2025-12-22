@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laser Art LB | Stainless Steel Engraving</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0e0e0e;
+  --card:#1a1a1a;
+  --border:#2f2f2f;
+  --accent:#9a9a9a;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',sans-serif;
+  background:linear-gradient(180deg,#141414,#0b0b0b);
+  color:#eee;
+}
+
+header{
+  text-align:center;
+  padding:60px 20px 40px;
+}
+header img{
+  width:120px;
+  margin-bottom:20px;
+}
+header h1{
+  letter-spacing:4px;
+  font-size:34px;
+}
+header p{
+  margin-top:10px;
+  color:#aaa;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:50px;
+  font-size:22px;
+  letter-spacing:3px;
+  color:#ddd;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+}
+
+.product{
+  background:linear-gradient(180deg,#1d1d1d,#141414);
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  transition:.3s;
+}
+.product:hover{
+  transform:translateY(-6px);
+  border-color:#555;
+}
+
+.product img{
+  width:100%;
+  height:230px;
+  object-fit:cover;
+}
+
+.product-info{
+  padding:20px;
+}
+
+.product-info h3{
+  font-size:18px;
+  margin-bottom:6px;
+}
+
+.price{
+  font-size:14px;
+  color:#aaa;
+  margin-bottom:14px;
+}
+
+label{
+  font-size:13px;
+  color:#bbb;
+}
+
+input[type=number]{
+  width:100%;
+  margin-top:6px;
+  padding:10px;
+  background:#0f0f0f;
+  border:1px solid #333;
+  border-radius:8px;
+  color:#fff;
+}
+
+.checkbox{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:12px;
+  font-size:13px;
+  color:#ccc;
+}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(135deg,#6b6b6b,#2e2e2e);
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+}
+button:hover{
+  background:linear-gradient(135deg,#8a8a8a,#3a3a3a);
+}
+
+.cod{
+  margin:80px auto;
+  max-width:720px;
+  background:#161616;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:35px;
+  text-align:center;
+}
+
+.cod h3{
+  margin-bottom:15px;
+  letter-spacing:2px;
+}
+.cod p{
+  color:#ccc;
+  line-height:1.7;
+}
+
+.contact{
+  text-align:center;
+  margin-top:60px;
+}
+.contact a{
+  display:inline-block;
+  margin:10px;
+  padding:14px 26px;
+  border-radius:12px;
+  border:1px solid #444;
+  color:#fff;
+  text-decoration:none;
+  transition:.3s;
+}
+.contact a:hover{
+  background:#2a2a2a;
+}
+
+footer{
+  margin-top:80px;
+  padding:25px;
+  background:#090909;
+  text-align:center;
+  color:#777;
+  font-size:14px;
+}
+</style>
+
+<script>
+function order(name){
+  let qty=document.getElementById(name+"_qty").value;
+  let both=document.getElementById(name+"_both").checked;
+  let price=(10+(both?3:0))*qty;
+
+  let msg=`Hello Laser Art LB 👋
+I want to order:
+
+Product: ${name}
+Quantity: ${qty}
+Engrave both sides: ${both?'Yes (+$3)':'No'}
+Total price: $${price}
+
+Payment: Cash on Delivery (Wakilni)`;
+
+  window.open("https://wa.me/96181388115?text="+encodeURIComponent(msg),"_blank");
+}
+</script>
+
+</head>
+<body>
+
+<header>
+<img src="logo.png">
+<h1>LASER ART LB</h1>
+<p>Stainless Steel • Laser Engraving • Custom Made</p>
+</header>
+
+<div class="container">
+<h2 class="section-title">OUR PRODUCTS</h2>
+
+<div class="products">
+
+<!-- PRODUCT TEMPLATE -->
+<!-- Change image + name only -->
+
+<div class="product">
+<img src="p1.jpg">
+<div class="product-info">
+<h3>Custom Name Keychain</h3>
+<div class="price">$10 • Stainless Steel</div>
+<label>Quantity</label>
+<input type="number" id="Custom Name Keychain_qty" value="1" min="1">
+<div class="checkbox">
+<input type="checkbox" id="Custom Name Keychain_both">
+<span>Engrave both sides (+$3)</span>
+</div>
+<button onclick="order('Custom Name Keychain')">Order on WhatsApp</button>
+</div>
+</div>
+
+<div class="product">
+<img src="p2.jpg">
+<div class="product-info">
+<h3>Car Logo Keychain</h3>
+<div class="price">$10 • Stainless Steel</div>
+<label>Quantity</label>
+<input type="number" id="Car Logo Keychain_qty" value="1" min="1">
+<div class="checkbox">
+<input type="checkbox" id="Car Logo Keychain_both">
+<span>Engrave both sides (+$3)</span>
+</div>
+<button onclick="order('Car Logo Keychain')">Order on WhatsApp</button>
+</div>
+</div>
+
+<div class="product">
+<img src="p3.jpg">
+<div class="product-info">
+<h3>Pet Tag</h3>
+<div class="price">$10 • Stainless Steel</div>
+<label>Quantity</label>
+<input type="number" id="Pet Tag_qty" value="1" min="1">
+<div class="checkbox">
+<input type="checkbox" id="Pet Tag_both">
+<span>Engrave both sides (+$3)</span>
+</div>
+<button onclick="order('Pet Tag')">Order on WhatsApp</button>
+</div>
+</div>
+
+<div class="product">
+<img src="p4.jpg">
+<div class="product-info">
+<h3>Couple Keychains</h3>
+<div class="price">$10 • Stainless Steel</div>
+<label>Quantity</label>
+<input type="number" id="Couple Keychains_qty" value="1" min="1">
+<div class="checkbox">
+<input type="checkbox" id="Couple Keychains_both">
+<span>Engrave both sides (+$3)</span>
+</div>
+<button onclick="order('Couple Keychains')">Order on WhatsApp</button>
+</div>
+</div>
+
+<div class="product">
+<img src="p5.jpg">
+<div class="product-info">
+<h3>Minimal Logo Tag</h3>
+<div class="price">$10 • Stainless Steel</div>
+<label>Quantity</label>
+<input type="number" id="Minimal Logo Tag_qty" value="1" min="1">
+<div class="checkbox">
+<input type="checkbox" id="Minimal Logo Tag_both">
+<span>Engrave both sides (+$3)</span>
+</div>
+<button onclick="order('Minimal Logo Tag')">Order on WhatsApp</button>
+</div>
+</div>
+
+<div class="product">
+<img src="p6.jpg">
+<div class="product-info">
+<h3>Custom Shape Keychain</h3>
+<div class="price">$10 • Stainless Steel</div>
+<label>Quantity</label>
+<input type="number" id="Custom Shape Keychain_qty" value="1" min="1">
+<div class="checkbox">
+<input type="checkbox" id="Custom Shape Keychain_both">
+<span>Engrave both sides (+$3)</span>
+</div>
+<button onclick="order('Custom Shape Keychain')">Order on WhatsApp</button>
+</div>
+</div>
+
+</div>
+
+<div class="cod">
+<h3>CASH ON DELIVERY</h3>
+<p>
+Delivery via <strong>Wakilni</strong><br>
+Pay only when you receive your order<br>
+Available all over Lebanon
+</p>
+</div>
+
+<div class="contact">
+<a href="https://wa.me/96181388115">WhatsApp</a>
+<a href="https://instagram.com/laserart.lb" target="_blank">Instagram</a>
+</div>
+
+</div>
+
+<footer>
+© 2025 Laser Art LB
+</footer>
+
+</body>
+</html>
