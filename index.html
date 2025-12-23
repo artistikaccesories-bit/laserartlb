@@ -4,6 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Laser Art LB</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KWE5K89087"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KWE5K89087');
+  </script>
+
+  <link rel="icon" type="image/png" href="logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
 
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -140,7 +152,9 @@ header img{width:120px;margin-bottom:10px}
   max-height:90vh;
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
+  padding-bottom:40px; /* ✅ FIX: allows scroll past WhatsApp button */
 }
+
 
 .overlayContent img{
   width:100%;
@@ -263,29 +277,29 @@ textarea{resize:none;min-height:80px}
     </div>
   </div>
 
-  <div class="product" onclick="openProduct('p2','Pet Tag',10)">
+  <div class="product" onclick="openProduct('p2','Spotify Song Image Keychain',10)">
     <img src="p2.jpg">
     <div class="product-info">
       <h3>Pet Tag</h3>
-      <p>Durable stainless steel pet tag</p>
+      <p>Custom keychain featuring your chosen song image with a scannable Spotify code underneath.</p>
       <div class="price">$10</div>
     </div>
   </div>
 
-  <div class="product" onclick="openProduct('p3','Name Keychain',10)">
+  <div class="product" onclick="openProduct('p3','Couples Keychain',10)">
     <img src="p3.jpg">
     <div class="product-info">
-      <h3>Name Keychain</h3>
-      <p>Personalized name engraving</p>
+      <h3>Couples Keychain</h3>
+      <p>Couples Customised Keychain</p>
       <div class="price">$10</div>
     </div>
   </div>
 
-  <div class="product" onclick="openProduct('p4','Couples Keychain',10)">
+  <div class="product" onclick="openProduct('p4','Spotify Keychain',10)">
     <img src="p4.jpg">
     <div class="product-info">
-      <h3>Couples Keychain</h3>
-      <p>Matching engraved keychains</p>
+      <h3>Spotify Keychain</h3>
+      <p>Spotify Customised Song Keychain</p>
       <div class="price">$10</div>
     </div>
   </div>
@@ -299,12 +313,12 @@ textarea{resize:none;min-height:80px}
     </div>
   </div>
 
-  <div class="product" onclick="openProduct('p6','Custom Logo Keychain',10)">
+  <div class="product" onclick="openProduct('p6','Bottle Opener Keychain',10)">
     <img src="p6.jpg">
     <div class="product-info">
-      <h3>Custom Logo Keychain</h3>
-      <p>Your logo engraved on stainless steel</p>
-      <div class="price">$10</div>
+      <h3>Lebanese Map With Cedar Tree</h3>
+      <p>Durable keychain with a built-in bottle opener, practical and easy to carry.</p>
+      <div class="price">$9</div>
     </div>
   </div>
 
@@ -340,27 +354,6 @@ textarea{resize:none;min-height:80px}
     <div class="product-info">
       <h3>Laser Cutting Service</h3>
       <p>Accurate laser cutting</p>
-      <div class="price">Pricing depends</div>
-    </div>
-  </div>
-
-</div>
-
-  <!-- SERVICES -->
-  <div class="product" onclick="openService('Laser Engraving Service','Professional engraving on metal, wood, acrylic and more.')">
-    <img src="service1.jpg">
-    <div class="product-info">
-      <h3>Laser Engraving Service</h3>
-      <p>Custom engraving on various materials</p>
-      <div class="price">Pricing depends</div>
-    </div>
-  </div>
-
-  <div class="product" onclick="openService('Laser Cutting Service','Precision laser cutting with clean edges.')">
-    <img src="service2.jpg">
-    <div class="product-info">
-      <h3>Laser Cutting Service</h3>
-      <p>Accurate laser cutting services</p>
       <div class="price">Pricing depends</div>
     </div>
   </div>
@@ -475,4 +468,4 @@ function openIG(){ window.open("https://instagram.com/laserart.lb","_blank"); }
 </script>
 
 </body>
-</html>
+</html> 
