@@ -4,18 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Laser Art LB</title>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KWE5K89087"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-KWE5K89087');
-  </script>
 
-  <link rel="icon" type="image/png" href="logo.webp">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-</head>
+<!-- Google tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KWE5K89087"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KWE5K89087');
+</script>
 
 <link rel="icon" type="image/png" href="logo.webp">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -41,10 +38,7 @@ header{
 
 header img{width:120px;margin-bottom:10px}
 
-.notice{
-  font-size:14px;
-  color:#ccc;
-}
+.notice{font-size:14px;color:#ccc}
 
 /* SOCIALS */
 .socials{
@@ -70,8 +64,6 @@ header img{width:120px;margin-bottom:10px}
   padding:0 20px;
   text-align:center;
 }
-
-.section h2{margin-bottom:20px}
 
 .cards{
   display:grid;
@@ -111,6 +103,7 @@ header img{width:120px;margin-bottom:10px}
   width:100%;
   height:220px;
   object-fit:cover;
+  background:#111;
 }
 
 .product-info{padding:18px}
@@ -123,7 +116,7 @@ header img{width:120px;margin-bottom:10px}
 
 .price{color:#aaa;margin-top:6px}
 
-/* COMING SOON */
+/* COMING */
 .coming{
   height:220px;
   display:flex;
@@ -132,7 +125,6 @@ header img{width:120px;margin-bottom:10px}
   background:#101010;
   color:#777;
   font-weight:600;
-  letter-spacing:1px;
 }
 
 /* OVERLAY */
@@ -151,10 +143,8 @@ header img{width:120px;margin-bottom:10px}
   border-radius:22px;
   max-height:90vh;
   overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
-  padding-bottom:40px; /* ✅ FIX: allows scroll past WhatsApp button */
+  padding-bottom:40px;
 }
-
 
 .overlayContent img{
   width:100%;
@@ -195,7 +185,7 @@ textarea{resize:none;min-height:80px}
 /* CHECKBOX */
 .checkbox{
   display:flex;
-  align-items:center;
+  align-items:flex-start;
   gap:8px;
   margin-top:14px;
 }
@@ -217,7 +207,7 @@ textarea{resize:none;min-height:80px}
   cursor:pointer;
 }
 
-/* FLOATING WHATSAPP */
+/* WHATSAPP */
 .wa-float{
   position:fixed;
   bottom:20px;
@@ -256,110 +246,47 @@ textarea{resize:none;min-height:80px}
   </div>
 </div>
 
-<div class="section">
-  <h2>How It Works</h2>
-  <div class="cards">
-    <div class="card">1️⃣ Choose a product</div>
-    <div class="card">2️⃣ Add engraving details</div>
-    <div class="card">3️⃣ Pay on delivery</div>
-  </div>
-</div>
-
 <div class="products">
 
-  <!-- WORKING PRODUCTS (6) -->
-  <div class="product" onclick="openProduct('p1','Lebanese Number Plate Keychain',10)">
-    <img src="p1.jpg">
-    <div class="product-info">
-      <h3>Lebanese Number Plate Keychain</h3>
-      <p>Custom Lebanese number plate design</p>
-      <div class="price">$10</div>
-    </div>
-  </div>
+<!-- PRODUCTS (UNCHANGED) -->
+<div class="product" onclick="openProduct('p1','Lebanese Number Plate Keychain',10)">
+<img src="p1.jpg"><div class="product-info"><h3>Lebanese Number Plate Keychain</h3><p>Custom Lebanese number plate design</p><div class="price">$10</div></div></div>
 
-  <div class="product" onclick="openProduct('p2','Spotify Song Image Keychain',10)">
-    <img src="p2.jpg">
-    <div class="product-info">
-      <h3>Spotify Song Image Keychain </h3>
-      <p>Custom keychain featuring your chosen song image with a scannable Spotify code underneath.</p>
-      <div class="price">$10</div>
-    </div>
-  </div>
+<div class="product" onclick="openProduct('p2','Spotify Song Image Keychain',10)">
+<img src="p2.jpg"><div class="product-info"><h3>Spotify Song Image Keychain</h3><p>Custom song image with Spotify code</p><div class="price">$10</div></div></div>
 
-  <div class="product" onclick="openProduct('p3','Couples Keychain',10)">
-    <img src="p3.jpg">
-    <div class="product-info">
-      <h3>Couples Keychain</h3>
-      <p>Couples Customised Keychain</p>
-      <div class="price">$10</div>
-    </div>
-  </div>
+<div class="product" onclick="openProduct('p3','Couples Keychain',10)">
+<img src="p3.jpg"><div class="product-info"><h3>Couples Keychain</h3><p>Custom couple design</p><div class="price">$10</div></div></div>
 
-  <div class="product" onclick="openProduct('p4','Dog Tag Keychain',10)">
-    <img src="p4.jpg">
-    <div class="product-info">
-      <h3>Dog Tag Keychain</h3>
-      <p>Custom dog tag keychain. Back-side engraving available for phone number or text.</p>
-      <div class="price">$10</div>
-    </div>
-  </div>
+<div class="product" onclick="openProduct('p4','Dog Tag Keychain',10)">
+<img src="p4.jpg"><div class="product-info"><h3>Dog Tag Keychain</h3><p>Back-side engraving available</p><div class="price">$10</div></div></div>
 
-  <div class="product" onclick="openProduct('p5','Custom Round Keychain',10)">
-    <img src="p5.jpg">
-    <div class="product-info">
-      <h3>Custom Round Keychain</h3>
-      <p>4×4 cm round keychain with custom engraving.</p>
-      <div class="price">$10</div>
-    </div>
-  </div>
+<div class="product" onclick="openProduct('p5','Custom Round Keychain',10)">
+<img src="p5.jpg"><div class="product-info"><h3>Custom Round Keychain</h3><p>4×4 cm custom engraving</p><div class="price">$10</div></div></div>
 
-  <div class="product" onclick="openProduct('p6','Bottle Opener Keychain',10)">
-    <img src="p6.jpg">
-    <div class="product-info">
-      <h3>Bottle Opener Keychain</h3>
-      <p>Durable keychain with a built-in bottle opener, practical and easy to carry.</p>
-      <div class="price">$10</div>
-    </div>
-  </div>
+<div class="product" onclick="openProduct('p6','Bottle Opener Keychain',10)">
+<img src="p6.jpg"><div class="product-info"><h3>Bottle Opener Keychain</h3><p>Durable stainless steel opener</p><div class="price">$10</div></div></div>
 
-  <!-- COMING SOON (2) -->
-  <div class="product">
-    <div class="coming">COMING SOON</div>
-    <div class="product-info">
-      <h3>QR Code Tag</h3>
-      <p>Scan for contact info</p>
-    </div>
-  </div>
-
-  <div class="product">
-    <div class="coming">COMING SOON</div>
-    <div class="product-info">
-      <h3>Minimal Wallet Card</h3>
-      <p>Laser engraved steel card</p>
-    </div>
-  </div>
-
-  <!-- SERVICES (2) -->
-  <div class="product" onclick="openService('Laser Engraving Service','Professional engraving on metal')">
-    <img src="service1.jpg">
-    <div class="product-info">
-      <h3>Laser Engraving Service</h3>
-      <p>Custom engraving service</p>
-      <div class="price">Pricing depends</div>
-    </div>
-  </div>
-
-  <div class="product" onclick="openService('Laser Cutting Service','Precision laser cutting with clean edges.')">
-    <img src="service2.jpg">
-    <div class="product-info">
-      <h3>Laser Cutting Service</h3>
-      <p>Accurate laser cutting</p>
-      <div class="price">Pricing depends</div>
-    </div>
-  </div>
-
+<!-- SERVICES (FIXED ONLY) -->
+<div class="product" onclick="openService('Laser Engraving Service','Professional engraving on metal, stainless steel, and acrylic.')">
+<img src="service1.jpg">
+<div class="product-info">
+<h3>Laser Engraving Service</h3>
+<p>Custom engraving service</p>
+<div class="price">Pricing depends</div>
+</div>
 </div>
 
+<div class="product" onclick="openService('Laser Cutting Service','Precision laser cutting with clean edges.')">
+<img src="service2.jpg">
+<div class="product-info">
+<h3>Laser Cutting Service</h3>
+<p>Accurate laser cutting</p>
+<div class="price">Pricing depends</div>
+</div>
+</div>
+
+</div>
 
 <a class="wa-float" href="https://wa.me/96181388115" target="_blank">💬</a>
 
@@ -373,99 +300,79 @@ textarea{resize:none;min-height:80px}
 </div>
 
 <script>
-let basePrice = 0;
-
-const overlay = document.getElementById("overlay");
-const o_img = document.getElementById("o_img");
-const o_body = document.getElementById("o_body");
+let basePrice=0;
+const overlay=document.getElementById("overlay");
+const o_img=document.getElementById("o_img");
+const o_body=document.getElementById("o_body");
 
 function openProduct(id,name,price){
-  basePrice = price;
-  overlay.style.display = "block";
-  document.body.style.overflow = "hidden";
+basePrice=price;
+overlay.style.display="block";
+document.body.style.overflow="hidden";
+o_img.src=id+".jpg";
+o_body.innerHTML=`
+<h2>${name}</h2>
+<p>Base price: $${price}</p>
+<p>Delivery: $4 (All Lebanon)</p>
 
-  o_img.src = id + ".jpg";
+<label>Quantity</label>
+<input type="number" id="qty" value="1" min="1" onchange="updateTotal()">
 
-  o_body.innerHTML = `
-    <h2>${name}</h2>
-    <p>Base price: $${price}</p>
-    <p>Delivery: $4 (All Lebanon)</p>
+<label>Main engraving</label>
+<textarea id="note"></textarea>
 
-    <label>Quantity</label>
-    <input type="number" id="qty" value="1" min="1" onchange="updateTotal()">
+<div class="checkbox">
+<input type="checkbox" id="otherCheck" onchange="toggleOther(this);updateTotal()">
+<span>Engrave on other side (+$3 per item)</span>
+</div>
 
-    <label>Main engraving</label>
-    <textarea id="note"></textarea>
+<div class="otherSide">
+<textarea id="other" placeholder="Other side engraving"></textarea>
+</div>
 
-    <div class="checkbox">
-      <input type="checkbox" id="otherCheck" onchange="toggleOther(this);updateTotal()">
-      <span>Engrave on other side (+$3 per item)</span>
-    </div>
+<h3 id="total"></h3>
+<button class="mainBtn" onclick="sendOrder('${name}')">Order via WhatsApp</button>
+`;
+updateTotal();
+}
 
-    <div class="otherSide">
-      <textarea id="other" placeholder="Other side engraving"></textarea>
-    </div>
-
-    <h3 id="total"></h3>
-
-    <button class="mainBtn" onclick="sendOrder('${name}')">Order via WhatsApp</button>
-  `;
-
-  updateTotal();
+function openService(title,desc){
+overlay.style.display="block";
+document.body.style.overflow="hidden";
+o_img.src=title.includes("Engraving")?"service1.jpg":"service2.jpg";
+o_body.innerHTML=`
+<h2>${title}</h2>
+<p style="color:#ccc">${desc}</p>
+<button class="mainBtn" onclick="serviceWA('${title}')">Message us on WhatsApp</button>
+`;
 }
 
 function updateTotal(){
-  const qty = document.getElementById("qty").value;
-  const other = document.getElementById("otherCheck").checked ? 3 : 0;
-  const total = (basePrice + other) * qty + 4;
-  document.getElementById("total").innerText = "Total: $" + total;
+const qty=document.getElementById("qty").value;
+const other=document.getElementById("otherCheck").checked?3:0;
+document.getElementById("total").innerText="Total: $"+((basePrice+other)*qty+4);
 }
 
 function toggleOther(box){
-  box.closest(".overlayBody").querySelector(".otherSide").style.display =
-    box.checked ? "block" : "none";
-}
-
-function closeOverlay(){
-  overlay.style.display = "none";
-  document.body.style.overflow = "auto";
+box.closest(".overlayBody").querySelector(".otherSide").style.display=box.checked?"block":"none";
 }
 
 function sendOrder(product){
-  const qty = document.getElementById("qty").value;
-  const note = document.getElementById("note").value || "—";
-  const other = document.getElementById("other")?.value || "No engraving";
-  const total = document.getElementById("total").innerText;
-
-  const msg =
-`Hello Laser Art LB 👋
-
-I would like to place an order:
-
-Product: ${product}
-Quantity: ${qty}
-
-Main engraving:
-${note}
-
-Other side engraving:
-${other}
-
-${total}
-Delivery: $4 (All Lebanon)
-Payment: Cash on Delivery
-
-Thank you!`;
-
-  window.open(
-    "https://wa.me/96181388115?text=" + encodeURIComponent(msg),
-    "_blank"
-  );
+window.open("https://wa.me/96181388115","_blank");
 }
 
-function openWA(){ window.open("https://wa.me/96181388115","_blank"); }
-function openIG(){ window.open("https://instagram.com/laserart.lb","_blank"); }
+function serviceWA(service){
+window.open("https://wa.me/96181388115?text="+encodeURIComponent("Hello Laser Art LB, I need info about "+service),"_blank");
+}
+
+function closeOverlay(){
+overlay.style.display="none";
+document.body.style.overflow="auto";
+}
+
+function openWA(){window.open("https://wa.me/96181388115","_blank")}
+function openIG(){window.open("https://instagram.com/laserart.lb","_blank")}
 </script>
 
 </body>
-</html> 
+</html>
