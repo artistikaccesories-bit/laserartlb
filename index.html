@@ -18,6 +18,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
+
+.aboutBtn{
+  position:absolute;
+  top:22px;
+  left:20px;
+  background:#151515;
+  color:#fff;
+  border:1px solid #333;
+  padding:8px 14px;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:600;
+}
+
 *{box-sizing:border-box}
 
 body{
@@ -230,6 +244,7 @@ textarea{resize:none;min-height:80px}
     <button onclick="openWA()"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg"></button>
     <button onclick="openIG()"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"></button>
   </div>
+<button class="aboutBtn" onclick="openAbout()">About Us</button>
 
   <img src="logo.webp">
   <h1>LASER ART LB</h1>
@@ -407,6 +422,40 @@ document.body.style.overflow="auto";
 
 function openWA(){window.open("https://wa.me/96181388115","_blank")}
 function openIG(){window.open("https://instagram.com/laserart.lb","_blank")}
+
+
+function openAbout(){
+  overlay.style.display="block";
+  document.body.style.overflow="hidden";
+  o_img.src="logo.webp";
+ o_body.innerHTML=`
+  <h2>About Us</h2>
+
+  <p><strong>Laserart LB</strong> is a creative laser engraving and cutting studio based in Lebanon,
+  specializing in high-quality customized products.</p>
+
+  <p>We are known for precision laser engraving on keychains, gifts, tags, and accessories,
+  crafted with attention to detail and premium materials.</p>
+
+  <p style="font-size:18px;font-weight:600;color:#fff;margin-top:18px;">
+    We are also proud to create some of the <strong>best custom shishas in the Middle East</strong>,
+    combining unique designs, premium finishes, and expert craftsmanship.
+  </p>
+
+  <p>
+    Laserart LB is proudly connected to <strong>Artistik Silver Plated</strong>, our main shop,
+    where quality, creativity, and experience come together.
+  </p>
+
+  <p>
+    From single custom pieces to bulk orders, our goal remains the same:
+    <strong>exceptional quality, originality, and customer satisfaction</strong>.
+  </p>
+`;
+;
+}
+
+
 </script>
 
 </body>
