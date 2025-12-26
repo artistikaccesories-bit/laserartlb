@@ -358,7 +358,42 @@ box.closest(".overlayBody").querySelector(".otherSide").style.display=box.checke
 }
 
 function sendOrder(product){
-window.open("https://wa.me/96181388115","_blank");
+  const qty = document.getElementById("qty").value;
+  const mainEngraving = document.getElementById("note").value.trim() || "Not specified";
+  const otherChecked = document.getElementById("otherCheck").checked;
+  const otherText = otherChecked
+    ? (document.getElementById("other").value.trim() || "Not specified")
+    : "No";
+  const otherPrice = otherChecked ? 3 : 0;
+
+  const total = ((basePrice + otherPrice) * qty + 4);
+
+  const message =
+`Hello 👋 Laser Art LB,
+
+I would like to place an order:
+
+• Product: ${product}
+• Quantity: ${qty}
+• Price: $${basePrice}
+
+Engraving details:
+• Main side: ${mainEngraving}
+• Other side engraving: ${otherChecked ? "Yes (+$3 per item)" : "No"}
+${otherChecked ? "• Other side text: " + otherText : ""}
+
+Delivery:
+• All Lebanon – $4
+
+Total amount: $${total}
+
+Thank you!`;
+
+  const phone = "96181388115";
+  const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
+
+  window.open(url, "_blank");
+
 }
 
 function serviceWA(service){
