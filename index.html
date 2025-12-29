@@ -316,57 +316,97 @@ textarea{resize:none;min-height:80px}
 
 <script>
 let basePrice=0;
+let discountPercent = 0;
+let appliedCode = "";
+let discountApplied = false;
 const overlay=document.getElementById("overlay");
 const o_img=document.getElementById("o_img");
 const o_body=document.getElementById("o_body");
 
-function openProduct(id,name,price){
-basePrice=price;
-overlay.style.display="block";
-document.body.style.overflow="hidden";
-o_img.src=id+".jpg";
-o_body.innerHTML=`
-<h2>${name}</h2>
-<p>Base price: $${price}</p>
-<p>Delivery: $4 (All Lebanon)</p>
+function openProduct(id, name, price){
+  basePrice = price;
 
-<label>Quantity</label>
-<input type="number" id="qty" value="1" min="1" onchange="updateTotal()">
+  // reset discount every time
+  discountPercent = 0;
+  appliedCode = "";
+  discountApplied = false;
 
-<label>Main engraving</label>
-<textarea id="note"></textarea>
+  overlay.style.display = "block";
+  document.body.style.overflow = "hidden";
 
-<div class="checkbox">
-<input type="checkbox" id="otherCheck" onchange="toggleOther(this);updateTotal()">
-<span>Engrave on other side (+$3 per item)</span>
-</div>
+  o_img.src = id + ".jpg";
 
-<div class="otherSide">
-<textarea id="other" placeholder="Other side engraving"></textarea>
-</div>
+  o_body.innerHTML = `
+    <h2>${name}</h2>
+    <p>Base price: $${price}</p>
+    <p>Delivery: $4 (All Lebanon)</p>
 
-<h3 id="total"></h3>
-<button class="mainBtn" onclick="sendOrder('${name}')">Order via WhatsApp</button>
-`;
-updateTotal();
+    <label>Quantity</label>
+    <input type="number" id="qty" value="1" min="1" onchange="updateTotal()">
+
+    <label>Main engraving</label>
+    <textarea id="note"></textarea>
+
+    <div class="checkbox">
+      <input type="checkbox" id="otherCheck" onchange="toggleOther(this);updateTotal()">
+      <span>Engrave on other side (+$3 per item)</span>
+    </div>
+
+    <div class="otherSide">
+      <textarea id="other" placeholder="Other side engraving"></textarea>
+    </div>
+
+    <hr style="margin:20px 0;border:1px solid #222">
+
+    <label style="font-weight:600;color:#fff">🎁 Discount Code</label>
+    <input
+      type="text"
+      id="discountCode"
+      placeholder="Type LASER20"
+      style="font-size:16px;padding:12px"
+    >
+
+    <button
+      class="mainBtn"
+      style="margin-top:12px;background:#25d366;color:#000"
+      onclick="applyDiscount()"
+    >
+      Apply Discount
+    </button>
+
+    <p id="discountMsg" style="margin-top:8px;font-size:14px"></p>
+
+    <h3 id="total"></h3>
+
+    <button class="mainBtn" onclick="sendOrder('${name}')">
+      Order via WhatsApp
+    </button>
+  `;
+
+  updateTotal();
 }
 
-function openService(title,desc){
-overlay.style.display="block";
-document.body.style.overflow="hidden";
-o_img.src=title.includes("Engraving")?"service1.jpg":"service2.jpg";
-o_body.innerHTML=`
-<h2>${title}</h2>
-<p style="color:#ccc">${desc}</p>
-<button class="mainBtn" onclick="serviceWA('${title}')">Message us on WhatsApp</button>
-`;
-}
+
 
 function updateTotal(){
-const qty=document.getElementById("qty").value;
-const other=document.getElementById("otherCheck").checked?3:0;
-document.getElementById("total").innerText="Total: $"+((basePrice+other)*qty+4);
+  const qty = document.getElementById("qty").value;
+  const other = document.getElementById("otherCheck").checked ? 3 : 0;
+
+  let subtotal = (basePrice + other) * qty;
+  let discount = 0;
+
+  if(discountApplied){
+    discount = subtotal * discountPercent / 100;
+  }
+
+  let total = subtotal - discount + 4;
+
+  document.getElementById("total").innerText =
+    `Total: $${total.toFixed(2)}` +
+    (discountApplied ? ` (−$${discount.toFixed(2)} discount)` : "");
 }
+
+
 
 function toggleOther(box){
 box.closest(".overlayBody").querySelector(".otherSide").style.display=box.checked?"block":"none";
@@ -381,7 +421,10 @@ function sendOrder(product){
     : "No";
   const otherPrice = otherChecked ? 3 : 0;
 
-  const total = ((basePrice + otherPrice) * qty + 4);
+let subtotal = (basePrice + otherPrice) * qty;
+let discount = discountApplied ? (subtotal * discountPercent / 100) : 0;
+const total = subtotal - discount + 4;
+
 
   const message =
 `Hello 👋 Laser Art LB,
@@ -399,6 +442,7 @@ ${otherChecked ? "• Other side text: " + otherText : ""}
 
 Delivery:
 • All Lebanon – $4
+${appliedCode ? "\nDiscount code applied: " + appliedCode + " (20% OFF)" : ""}
 
 Total amount: $${total}
 
@@ -454,10 +498,27 @@ function openAbout(){
 `;
 ;
 }
+function applyDiscount(){
+  const code = document.getElementById("discountCode").value.trim().toUpperCase();
+
+  if(code === "LASER20"){
+    discountPercent = 20;
+    appliedCode = code;
+    discountApplied = true;
+    document.getElementById("discountMsg").innerText = "🎉 20% discount applied!";
+  } else {
+    discountPercent = 0;
+    appliedCode = "";
+    discountApplied = false;
+    document.getElementById("discountMsg").innerText = "❌ Invalid code";
+  }
+
+  updateTotal();
+}
+
 
 
 </script>
 
 </body>
 </html>
-   
