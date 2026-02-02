@@ -54,6 +54,7 @@ header img{width:120px;margin-bottom:10px}
 
 .notice{font-size:14px;color:#ccc}
 
+
 /* SOCIALS */
 .socials{
   position:absolute;
@@ -70,6 +71,7 @@ header img{width:120px;margin-bottom:10px}
 }
 
 .socials img{width:26px}
+
 
 /* SECTIONS */
 .section{
@@ -316,9 +318,6 @@ textarea{resize:none;min-height:80px}
 
 <script>
 let basePrice=0;
-let discountPercent = 0;
-let appliedCode = "";
-let discountApplied = false;
 const overlay=document.getElementById("overlay");
 const o_img=document.getElementById("o_img");
 const o_body=document.getElementById("o_body");
@@ -356,26 +355,6 @@ function openProduct(id, name, price){
       <textarea id="other" placeholder="Other side engraving"></textarea>
     </div>
 
-    <hr style="margin:20px 0;border:1px solid #222">
-
-    <label style="font-weight:600;color:#fff">🎁 Discount Code</label>
-    <input
-      type="text"
-      id="discountCode"
-      placeholder="Type LASER20"
-      style="font-size:16px;padding:12px"
-    >
-
-    <button
-      class="mainBtn"
-      style="margin-top:12px;background:#25d366;color:#000"
-      onclick="applyDiscount()"
-    >
-      Apply Discount
-    </button>
-
-    <p id="discountMsg" style="margin-top:8px;font-size:14px"></p>
-
     <h3 id="total"></h3>
 
     <button class="mainBtn" onclick="sendOrder('${name}')">
@@ -393,18 +372,12 @@ function updateTotal(){
   const other = document.getElementById("otherCheck").checked ? 3 : 0;
 
   let subtotal = (basePrice + other) * qty;
-  let discount = 0;
-
-  if(discountApplied){
-    discount = subtotal * discountPercent / 100;
-  }
-
-  let total = subtotal - discount + 4;
+  let total = subtotal + 4;
 
   document.getElementById("total").innerText =
-    `Total: $${total.toFixed(2)}` +
-    (discountApplied ? ` (−$${discount.toFixed(2)} discount)` : "");
+    `Total: $${total.toFixed(2)}`;
 }
+
 
 
 
@@ -422,8 +395,7 @@ function sendOrder(product){
   const otherPrice = otherChecked ? 3 : 0;
 
 let subtotal = (basePrice + otherPrice) * qty;
-let discount = discountApplied ? (subtotal * discountPercent / 100) : 0;
-const total = subtotal - discount + 4;
+const total = subtotal + 4;
 
 
   const message =
@@ -442,7 +414,6 @@ ${otherChecked ? "• Other side text: " + otherText : ""}
 
 Delivery:
 • All Lebanon – $4
-${appliedCode ? "\nDiscount code applied: " + appliedCode + " (20% OFF)" : ""}
 
 Total amount: $${total}
 
