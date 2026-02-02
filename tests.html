@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laser Art LB</title>
+
+<!-- Google tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KWE5K89087"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KWE5K89087');
+</script>
+
+<link rel="icon" type="image/png" href="logo.webp">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:#0b0b0b;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* HEADER */
+header{
+  text-align:center;
+  padding:35px 20px 30px;
+  border-bottom:1px solid #222;
+  position:relative;
+}
+
+header img{width:120px;margin-bottom:10px}
+
+.notice{font-size:14px;color:#ccc}
+
+.happy-wrap{
+  margin-top:14px;
+  font-size:20px;
+  font-weight:800;
+  background:linear-gradient(135deg,#f5f5f5,#bfbfbf);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* ABOUT BUTTON */
+.aboutBtn{
+  position:absolute;
+  top:22px;
+  left:20px;
+  background:#151515;
+  color:#fff;
+  border:1px solid #333;
+  padding:8px 14px;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+/* SOCIALS */
+.socials{
+  position:absolute;
+  top:20px;
+  right:20px;
+  display:flex;
+  gap:14px;
+}
+
+.socials button{
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+
+.socials img{width:26px}
+
+/* SECTIONS */
+.section{
+  max-width:1100px;
+  margin:40px auto;
+  padding:0 20px;
+  text-align:center;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:#151515;
+  padding:20px;
+  border-radius:18px;
+  font-size:14px;
+  color:#ccc;
+}
+
+/* PRODUCTS */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+  padding:40px;
+  max-width:1200px;
+  margin:auto;
+}
+
+.product{
+  background:#151515;
+  border-radius:18px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.3s ease;
+}
+
+.product:hover{
+  transform:translateY(-5px);
+  box-shadow:0 10px 30px rgba(0,0,0,.6);
+}
+
+.product img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  background:#111;
+}
+
+.product-info{padding:18px}
+
+.product-info p{
+  font-size:13px;
+  color:#bbb;
+  margin:6px 0 0;
+}
+
+.price{color:#aaa;margin-top:6px}
+
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  display:none;
+  z-index:1000;
+}
+
+.overlayContent{
+  max-width:520px;
+  margin:40px auto;
+  background:#141414;
+  border-radius:22px;
+  max-height:90vh;
+  overflow-y:auto;
+  padding-bottom:40px;
+}
+
+.overlayContent img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+}
+
+.overlayBody{padding:22px}
+
+.closeBtn{
+  position:fixed;
+  top:18px;
+  right:22px;
+  font-size:32px;
+  cursor:pointer;
+}
+
+/* FORM */
+label{
+  display:block;
+  margin-top:14px;
+  color:#aaa;
+  font-size:14px;
+}
+
+input[type="number"], textarea{
+  width:100%;
+  background:#0f0f0f;
+  border:1px solid #333;
+  color:#fff;
+  padding:10px;
+  border-radius:10px;
+  margin-top:6px;
+}
+
+textarea{resize:none;min-height:80px}
+
+/* CHECKBOX */
+.checkbox{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  margin-top:14px;
+}
+
+.checkbox span{font-size:14px;color:#ccc}
+
+.otherSide{display:none;margin-top:10px}
+
+/* BUTTON */
+.mainBtn{
+  width:100%;
+  margin-top:18px;
+  padding:15px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#777,#aaa);
+  color:#000;
+  font-weight:800;
+  cursor:pointer;
+}
+
+/* WHATSAPP */
+.wa-float{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25d366;
+  color:#fff;
+  font-size:26px;
+  padding:16px;
+  border-radius:50%;
+  text-decoration:none;
+  z-index:999;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="socials">
+    <button onclick="openWA()"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg"></button>
+    <button onclick="openIG()"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"></button>
+  </div>
+
+  <button class="aboutBtn" onclick="openAbout()">About Us</button>
+
+  <img src="logo.webp">
+  <h1>LASER ART LB</h1>
+  <div class="notice">🚚 Delivery all over Lebanon — $4 flat fee • Cash on Delivery</div>
+  <div class="happy-wrap"><span id="happyCounter">0</span>+ happy customers</div>
+</header>
+
+<div class="section">
+  <h2>Why Choose Us</h2>
+  <div class="cards">
+    <div class="card">✔ Stainless steel – no rust</div>
+    <div class="card">✔ Precision laser engraving</div>
+    <div class="card">✔ Custom-made products</div>
+    <div class="card">✔ Cash on delivery</div>
+  </div>
+</div>
+
+<div class="products">
+
+<div class="product" onclick="openProduct('p1','Lebanese Number Plate Keychain',10)">
+<img src="p1.jpg"><div class="product-info"><h3>Lebanese Number Plate Keychain</h3><p>Custom Lebanese number plate design</p><div class="price">$10</div></div></div>
+
+<div class="product" onclick="openProduct('p2','Spotify Song Image Keychain',10)">
+<img src="p2.jpg"><div class="product-info"><h3>Spotify Song Image Keychain</h3><p>Custom song image with Spotify code</p><div class="price">$10</div></div></div>
+
+<div class="product" onclick="openProduct('p3','Couples Keychain',10)">
+<img src="p3.jpg"><div class="product-info"><h3>Couples Keychain</h3><p>Custom couple design</p><div class="price">$10</div></div></div>
+
+<div class="product" onclick="openProduct('p4','Dog Tag Keychain',10)">
+<img src="p4.jpg"><div class="product-info"><h3>Dog Tag Keychain</h3><p>Back-side engraving available</p><div class="price">$10</div></div></div>
+
+<div class="product" onclick="openProduct('p5','Custom Round Keychain',10)">
+<img src="p5.jpg"><div class="product-info"><h3>Custom Round Keychain</h3><p>4×4 cm custom engraving</p><div class="price">$10</div></div></div>
+
+<div class="product" onclick="openProduct('p6','Bottle Opener Keychain',10)">
+<img src="p6.jpg"><div class="product-info"><h3>Bottle Opener Keychain</h3><p>Durable stainless steel opener</p><div class="price">$10</div></div></div>
+
+</div>
+
+<a class="wa-float" href="https://wa.me/96181388115" target="_blank">💬</a>
+
+<div class="overlay" id="overlay">
+  <div class="closeBtn" onclick="closeOverlay()">×</div>
+  <div class="overlayContent">
+    <img id="o_img">
+    <div class="overlayBody" id="o_body"></div>
+  </div>
+</div>
+
+<script>
+let basePrice=0;
+const overlay=document.getElementById("overlay");
+const o_img=document.getElementById("o_img");
+const o_body=document.getElementById("o_body");
+
+/* COUNTER */
+const counter = document.getElementById("happyCounter");
+
+const target = 500;
+const duration = 3000; // ⏱️ 3.5 seconds (increase = slower)
+let start = null;
+
+function animateCounter(timestamp){
+  if(!start) start = timestamp;
+  const progress = timestamp - start;
+
+  const value = Math.min(
+    Math.floor((progress / duration) * target),
+    target
+  );
+
+  counter.innerText = value;
+
+  if(progress < duration){
+    requestAnimationFrame(animateCounter);
+  }
+}
+
+requestAnimationFrame(animateCounter);
+
+
+function openProduct(id,name,price){
+  basePrice=price;
+  overlay.style.display="block";
+  document.body.style.overflow="hidden";
+  o_img.src=id+".jpg";
+
+  o_body.innerHTML=`
+    <h2>${name}</h2>
+    <p>Price: $${price}</p>
+    <p>Delivery: $4 (All Lebanon)</p>
+
+    <label>Quantity</label>
+    <input type="number" id="qty" value="1" min="1" onchange="updateTotal()">
+
+    <label>Main engraving</label>
+    <textarea id="note"></textarea>
+
+    <div class="checkbox">
+      <input type="checkbox" id="otherCheck" onchange="toggleOther(this);updateTotal()">
+      <span>Engrave on other side (+$3 per item)</span>
+    </div>
+
+    <div class="otherSide">
+      <textarea id="other" placeholder="Other side engraving"></textarea>
+    </div>
+
+    <h3 id="total"></h3>
+
+    <button class="mainBtn" onclick="sendOrder('${name}')">
+      Order via WhatsApp
+    </button>
+  `;
+  updateTotal();
+}
+
+function updateTotal(){
+  const qty=document.getElementById("qty").value;
+  const other=document.getElementById("otherCheck").checked?3:0;
+  const total=(basePrice+other)*qty+4;
+  document.getElementById("total").innerText=`Total: $${total.toFixed(2)}`;
+}
+
+function toggleOther(box){
+  box.closest(".overlayBody").querySelector(".otherSide").style.display=box.checked?"block":"none";
+}
+
+function sendOrder(product){
+  const qty=document.getElementById("qty").value;
+  const main=document.getElementById("note").value||"Not specified";
+  const otherOn=document.getElementById("otherCheck").checked;
+  const otherTxt=otherOn?(document.getElementById("other").value||"Not specified"):"No";
+  const total=(basePrice+(otherOn?3:0))*qty+4;
+
+  const msg=`Hello Laser Art LB 👋
+
+Product: ${product}
+Quantity: ${qty}
+Main engraving: ${main}
+Other side: ${otherOn?"Yes":"No"}
+${otherOn?"Other text: "+otherTxt:""}
+
+Delivery: $4
+Total: $${total}`;
+
+  window.open("https://wa.me/96181388115?text="+encodeURIComponent(msg),"_blank");
+}
+
+function closeOverlay(){
+  overlay.style.display="none";
+  document.body.style.overflow="auto";
+}
+
+function openWA(){window.open("https://wa.me/96181388115","_blank")}
+function openIG(){window.open("https://instagram.com/laserart.lb","_blank")}
+
+function openAbout(){
+  overlay.style.display="block";
+  document.body.style.overflow="hidden";
+  o_img.src="logo.webp";
+  o_body.innerHTML=`
+    <h2>About Us</h2>
+    <p><strong>Laserart LB</strong> is a creative laser engraving studio based in Lebanon.</p>
+    <p>We specialize in premium custom keychains, gifts, and accessories.</p>
+    <p style="font-size:18px;font-weight:600;margin-top:18px">
+      Best custom shishas in the Middle East.
+    </p>
+  `;
+}
+</script>
+
+</body>
+</html>
