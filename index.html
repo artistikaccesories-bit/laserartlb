@@ -18,20 +18,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-
-.aboutBtn{
-  position:absolute;
-  top:22px;
-  left:20px;
-  background:#151515;
-  color:#fff;
-  border:1px solid #333;
-  padding:8px 14px;
-  border-radius:20px;
-  cursor:pointer;
-  font-weight:600;
-}
-
 *{box-sizing:border-box}
 
 body{
@@ -54,6 +40,32 @@ header img{width:120px;margin-bottom:10px}
 
 .notice{font-size:14px;color:#ccc}
 
+.happy-wrap{
+  margin-top:14px;
+  font-size:20px;
+  font-weight:800;
+  background:linear-gradient(135deg,#f5f5f5,#bfbfbf);
+
+  -webkit-background-clip:text; /* Safari / old Chrome */
+  background-clip:text;         /* Standard */
+
+  -webkit-text-fill-color:transparent;
+  color:transparent;            /* Fallback */
+}
+
+/* ABOUT BUTTON */
+.aboutBtn{
+  position:absolute;
+  top:22px;
+  left:20px;
+  background:#151515;
+  color:#fff;
+  border:1px solid #333;
+  padding:8px 14px;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:600;
+}
 
 /* SOCIALS */
 .socials{
@@ -71,7 +83,6 @@ header img{width:120px;margin-bottom:10px}
 }
 
 .socials img{width:26px}
-
 
 /* SECTIONS */
 .section{
@@ -110,10 +121,13 @@ header img{width:120px;margin-bottom:10px}
   border-radius:18px;
   overflow:hidden;
   cursor:pointer;
-  transition:.3s;
+  transition:.3s ease;
 }
 
-.product:hover{transform:translateY(-5px)}
+.product:hover{
+  transform:translateY(-5px);
+  box-shadow:0 10px 30px rgba(0,0,0,.6);
+}
 
 .product img{
   width:100%;
@@ -131,17 +145,6 @@ header img{width:120px;margin-bottom:10px}
 }
 
 .price{color:#aaa;margin-top:6px}
-
-/* COMING */
-.coming{
-  height:220px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#101010;
-  color:#777;
-  font-weight:600;
-}
 
 /* OVERLAY */
 .overlay{
@@ -246,11 +249,13 @@ textarea{resize:none;min-height:80px}
     <button onclick="openWA()"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg"></button>
     <button onclick="openIG()"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"></button>
   </div>
-<button class="aboutBtn" onclick="openAbout()">About Us</button>
+
+  <button class="aboutBtn" onclick="openAbout()">About Us</button>
 
   <img src="logo.webp">
   <h1>LASER ART LB</h1>
   <div class="notice">🚚 Delivery all over Lebanon — $4 flat fee • Cash on Delivery</div>
+  <div class="happy-wrap"><span id="happyCounter">0</span>+ happy customers</div>
 </header>
 
 <div class="section">
@@ -265,7 +270,6 @@ textarea{resize:none;min-height:80px}
 
 <div class="products">
 
-<!-- PRODUCTS (UNCHANGED) -->
 <div class="product" onclick="openProduct('p1','Lebanese Number Plate Keychain',10)">
 <img src="p1.jpg"><div class="product-info"><h3>Lebanese Number Plate Keychain</h3><p>Custom Lebanese number plate design</p><div class="price">$10</div></div></div>
 
@@ -284,30 +288,10 @@ textarea{resize:none;min-height:80px}
 <div class="product" onclick="openProduct('p6','Bottle Opener Keychain',10)">
 <img src="p6.jpg"><div class="product-info"><h3>Bottle Opener Keychain</h3><p>Durable stainless steel opener</p><div class="price">$10</div></div></div>
 
-<!-- SERVICES (FIXED ONLY) -->
-<div class="product" onclick="openService('Laser Engraving Service','Professional engraving on metal, stainless steel, and acrylic.')">
-<img src="service1.jpg">
-<div class="product-info">
-<h3>Laser Engraving Service</h3>
-<p>Custom engraving service</p>
-<div class="price">Pricing depends</div>
-</div>
-</div>
-
-<div class="product" onclick="openService('Laser Cutting Service','Precision laser cutting with clean edges.')">
-<img src="service2.jpg">
-<div class="product-info">
-<h3>Laser Cutting Service</h3>
-<p>Accurate laser cutting</p>
-<div class="price">Pricing depends</div>
-</div>
-</div>
-
 </div>
 
 <a class="wa-float" href="https://wa.me/96181388115" target="_blank">💬</a>
 
-<!-- OVERLAY -->
 <div class="overlay" id="overlay">
   <div class="closeBtn" onclick="closeOverlay()">×</div>
   <div class="overlayContent">
@@ -322,22 +306,41 @@ const overlay=document.getElementById("overlay");
 const o_img=document.getElementById("o_img");
 const o_body=document.getElementById("o_body");
 
-function openProduct(id, name, price){
-  basePrice = price;
+/* COUNTER */
+const counter = document.getElementById("happyCounter");
 
-  // reset discount every time
-  discountPercent = 0;
-  appliedCode = "";
-  discountApplied = false;
+const target = 500;
+const duration = 3000; // ⏱️ 3.5 seconds (increase = slower)
+let start = null;
 
-  overlay.style.display = "block";
-  document.body.style.overflow = "hidden";
+function animateCounter(timestamp){
+  if(!start) start = timestamp;
+  const progress = timestamp - start;
 
-  o_img.src = id + ".jpg";
+  const value = Math.min(
+    Math.floor((progress / duration) * target),
+    target
+  );
 
-  o_body.innerHTML = `
+  counter.innerText = value;
+
+  if(progress < duration){
+    requestAnimationFrame(animateCounter);
+  }
+}
+
+requestAnimationFrame(animateCounter);
+
+
+function openProduct(id,name,price){
+  basePrice=price;
+  overlay.style.display="block";
+  document.body.style.overflow="hidden";
+  o_img.src=id+".jpg";
+
+  o_body.innerHTML=`
     <h2>${name}</h2>
-    <p>Base price: $${price}</p>
+    <p>Price: $${price}</p>
     <p>Delivery: $4 (All Lebanon)</p>
 
     <label>Quantity</label>
@@ -361,134 +364,62 @@ function openProduct(id, name, price){
       Order via WhatsApp
     </button>
   `;
-
   updateTotal();
 }
 
-
-
 function updateTotal(){
-  const qty = document.getElementById("qty").value;
-  const other = document.getElementById("otherCheck").checked ? 3 : 0;
-
-  let subtotal = (basePrice + other) * qty;
-  let total = subtotal + 4;
-
-  document.getElementById("total").innerText =
-    `Total: $${total.toFixed(2)}`;
+  const qty=document.getElementById("qty").value;
+  const other=document.getElementById("otherCheck").checked?3:0;
+  const total=(basePrice+other)*qty+4;
+  document.getElementById("total").innerText=`Total: $${total.toFixed(2)}`;
 }
 
-
-
-
 function toggleOther(box){
-box.closest(".overlayBody").querySelector(".otherSide").style.display=box.checked?"block":"none";
+  box.closest(".overlayBody").querySelector(".otherSide").style.display=box.checked?"block":"none";
 }
 
 function sendOrder(product){
-  const qty = document.getElementById("qty").value;
-  const mainEngraving = document.getElementById("note").value.trim() || "Not specified";
-  const otherChecked = document.getElementById("otherCheck").checked;
-  const otherText = otherChecked
-    ? (document.getElementById("other").value.trim() || "Not specified")
-    : "No";
-  const otherPrice = otherChecked ? 3 : 0;
+  const qty=document.getElementById("qty").value;
+  const main=document.getElementById("note").value||"Not specified";
+  const otherOn=document.getElementById("otherCheck").checked;
+  const otherTxt=otherOn?(document.getElementById("other").value||"Not specified"):"No";
+  const total=(basePrice+(otherOn?3:0))*qty+4;
 
-let subtotal = (basePrice + otherPrice) * qty;
-const total = subtotal + 4;
+  const msg=`Hello Laser Art LB 👋
 
+Product: ${product}
+Quantity: ${qty}
+Main engraving: ${main}
+Other side: ${otherOn?"Yes":"No"}
+${otherOn?"Other text: "+otherTxt:""}
 
-  const message =
-`Hello 👋 Laser Art LB,
+Delivery: $4
+Total: $${total}`;
 
-I would like to place an order:
-
-• Product: ${product}
-• Quantity: ${qty}
-• Price: $${basePrice}
-
-Engraving details:
-• Main side: ${mainEngraving}
-• Other side engraving: ${otherChecked ? "Yes (+$3 per item)" : "No"}
-${otherChecked ? "• Other side text: " + otherText : ""}
-
-Delivery:
-• All Lebanon – $4
-
-Total amount: $${total}
-
-Thank you!`;
-
-  const phone = "96181388115";
-  const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
-
-  window.open(url, "_blank");
-
-}
-
-function serviceWA(service){
-window.open("https://wa.me/96181388115?text="+encodeURIComponent("Hello Laser Art LB, I need info about "+service),"_blank");
+  window.open("https://wa.me/96181388115?text="+encodeURIComponent(msg),"_blank");
 }
 
 function closeOverlay(){
-overlay.style.display="none";
-document.body.style.overflow="auto";
+  overlay.style.display="none";
+  document.body.style.overflow="auto";
 }
 
 function openWA(){window.open("https://wa.me/96181388115","_blank")}
 function openIG(){window.open("https://instagram.com/laserart.lb","_blank")}
 
-
 function openAbout(){
   overlay.style.display="block";
   document.body.style.overflow="hidden";
   o_img.src="logo.webp";
- o_body.innerHTML=`
-  <h2>About Us</h2>
-
-  <p><strong>Laserart LB</strong> is a creative laser engraving and cutting studio based in Lebanon,
-  specializing in high-quality customized products.</p>
-
-  <p>We are known for precision laser engraving on keychains, gifts, tags, and accessories,
-  crafted with attention to detail and premium materials.</p>
-
-  <p style="font-size:18px;font-weight:600;color:#fff;margin-top:18px;">
-    We are also proud to create some of the <strong>best custom shishas in the Middle East</strong>,
-    combining unique designs, premium finishes, and expert craftsmanship.
-  </p>
-
-  <p>
-    Laserart LB is proudly connected to <strong>Artistik Silver Plated</strong>, our main shop,
-    where quality, creativity, and experience come together.
-  </p>
-
-  <p>
-    From single custom pieces to bulk orders, our goal remains the same:
-    <strong>exceptional quality, originality, and customer satisfaction</strong>.
-  </p>
-`;
-;
+  o_body.innerHTML=`
+    <h2>About Us</h2>
+    <p><strong>Laserart LB</strong> is a creative laser engraving studio based in Lebanon.</p>
+    <p>We specialize in premium custom keychains, gifts, and accessories.</p>
+    <p style="font-size:18px;font-weight:600;margin-top:18px">
+      Best custom shishas in the Middle East.
+    </p>
+  `;
 }
-function applyDiscount(){
-  const code = document.getElementById("discountCode").value.trim().toUpperCase();
-
-  if(code === "LASER20"){
-    discountPercent = 20;
-    appliedCode = code;
-    discountApplied = true;
-    document.getElementById("discountMsg").innerText = "🎉 20% discount applied!";
-  } else {
-    discountPercent = 0;
-    appliedCode = "";
-    discountApplied = false;
-    document.getElementById("discountMsg").innerText = "❌ Invalid code";
-  }
-
-  updateTotal();
-}
-
-
-
 </script>
 
 </body>
