@@ -9,8 +9,11 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "cap:sync": "vite build && npx cap sync",
+    "android:build": "vite build && npx cap sync android",
     "electron:start": "concurrently -k \"vite\" \"wait-on tcp:5173 && electron .\"",
-    "electron:build": "vite build && electron-builder"
+    "electron:build": "vite build && electron-builder",
+    "electron:rebuild": "npm run build && electron-builder"
   },
   "build": {
     "appId": "com.laserart.admin",

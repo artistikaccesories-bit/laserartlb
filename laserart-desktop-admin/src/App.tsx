@@ -3,13 +3,13 @@ import LoginScreen from './screens/LoginScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import LiveVisitorsScreen from './screens/LiveVisitorsScreen';
 import CartScreen from './screens/CartScreen';
-import VisitorLogScreen from './screens/VisitorLogScreen';
+import OrdersScreen from './screens/OrdersScreen';
 import InventoryScreen from './screens/InventoryScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import BottomNav from './components/BottomNav';
 import './index.css';
 
-type Tab = 'dashboard' | 'live' | 'carts' | 'log' | 'inventory' | 'settings';
+type Tab = 'dashboard' | 'live' | 'carts' | 'orders' | 'inventory' | 'settings';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -29,7 +29,7 @@ function App() {
       case 'dashboard': return <DashboardScreen />;
       case 'live': return <LiveVisitorsScreen />;
       case 'carts': return <CartScreen />;
-      case 'log': return <VisitorLogScreen />;
+      case 'orders': return <OrdersScreen />;
       case 'inventory': return <InventoryScreen />;
       case 'settings': return <SettingsScreen onLogout={handleLogout} />;
       default: return <DashboardScreen />;

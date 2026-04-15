@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import type { } from 'react/jsx-runtime';
 import { db, storage, collection, addDoc, getDocs, query, orderBy, onSnapshot, doc, deleteDoc, ref, uploadBytes, getDownloadURL } from '../utils/firebase';
-import { Package, Plus, Trash2, Image as ImageIcon, Loader2, X, DollarSign } from 'lucide-react';
+import { Package, Plus, Trash2, Image as ImageIcon, Loader2, X, Edit2 } from 'lucide-react';
 
 interface Product {
     id: string;
@@ -17,7 +17,8 @@ interface Product {
 const InventoryScreen: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
-    const [showAddModal, setShowAddModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [editingProduct, setEditingProduct] = useState<Product | null>(null);
     const [uploading, setUploading] = useState(false);
 
     // Form state
@@ -25,6 +26,7 @@ const InventoryScreen: React.FC = () => {
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState('keychain');
     const [description, setDescription] = useState('');
+    const [stock, setStock] = useState('10');
     const [files, setFiles] = useState<FileList | null>(null);
 
     useEffect(() => {
@@ -41,7 +43,29 @@ const InventoryScreen: React.FC = () => {
         return () => unsub();
     }, []);
 
-    const handleAddProduct = async (e: React.FormEvent) => {
+    const openEditModal = (product: Product) => {
+        setEditingProduct(product);
+        setName(product.name);
+        setPrice(product.price.toString());
+        setCategory(product.category);
+        setDescription(product.description);
+        setStock(product.stock?.toString() || '10');
+        setFiles(null);
+        setShowModal(true);
+    };
+
+    const openAddModal = () => {
+        setEditingProduct(null);
+        setName('');
+        setPrice('');
+        setCategory('keychain');
+        setDescription('');
+        setStock('10');
+        setFiles(null);
+        setShowModal(true);
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         
         if (!db || !storage) {
@@ -49,7 +73,7 @@ const InventoryScreen: React.FC = () => {
             return;
         }
 
-        if (!files || files.length === 0) {
+        if (!editingProduct && (!files || files.length === 0)) {
             alert("Please select at least one image.");
             return;
         }
@@ -60,48 +84,50 @@ const InventoryScreen: React.FC = () => {
         }
 
         setUploading(true);
-        console.log("Starting product upload...");
 
         try {
-            const uploadPromises = Array.from(files).map(async (file) => {
-                console.log(`Uploading ${file.name}...`);
-                const storageRef = ref(storage, `products/${Date.now()}_${Math.random().toString(36).substring(7)}_${file.name}`);
-                const uploadResult = await uploadBytes(storageRef, file);
-                const url = await getDownloadURL(uploadResult.ref);
-                console.log(`Uploaded ${file.name}: ${url}`);
-                return url;
-            });
+            let imageUrls = editingProduct?.images || [];
+            let mainImage = editingProduct?.image || '';
 
-            const imageUrls = await Promise.all(uploadPromises);
+            if (files && files.length > 0) {
+                const uploadPromises = Array.from(files).map(async (file) => {
+                    const storageRef = ref(storage, `products/${Date.now()}_${Math.random().toString(36).substring(7)}_${file.name}`);
+                    const uploadResult = await uploadBytes(storageRef, file);
+                    const url = await getDownloadURL(uploadResult.ref);
+                    return url;
+                });
+
+                imageUrls = await Promise.all(uploadPromises);
+                mainImage = imageUrls[0];
+            }
 
             const productData = {
                 name: name.trim(),
                 price: parseFloat(price),
                 category,
                 description: description.trim(),
-                image: imageUrls[0],
+                image: mainImage,
                 images: imageUrls,
-                stock: 10, // Default stock
-                createdAt: new Date(),
+                stock: parseInt(stock),
+                updatedAt: new Date(),
                 handle: name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
             };
 
-            console.log("Saving product to Firestore:", productData);
-            await addDoc(collection(db, 'products'), productData);
-
-            console.log("Product added successfully!");
-            alert("Product added successfully!");
+            if (editingProduct) {
+                await updateDoc(doc(db, 'products', editingProduct.id), productData);
+                alert("Product updated successfully!");
+            } else {
+                await addDoc(collection(db, 'products'), {
+                    ...productData,
+                    createdAt: new Date()
+                });
+                alert("Product added successfully!");
+            }
             
-            // Reset form
-            setShowAddModal(false);
-            setName('');
-            setPrice('');
-            setDescription('');
-            setFiles(null);
-            setCategory('keychain');
+            setShowModal(false);
         } catch (error: any) {
-            console.error("Detailed error adding product:", error);
-            alert(`Failed to add product: ${error.message || 'Unknown error'}`);
+            console.error("Error saving product:", error);
+            alert(`Failed to save product: ${error.message || 'Unknown error'}`);
         } finally {
             setUploading(false);
         }
@@ -123,9 +149,9 @@ const InventoryScreen: React.FC = () => {
                     <h1 className="screen-title">Inventory</h1>
                     <p className="screen-subtitle">{products.length} products in shop</p>
                 </div>
-                <button className="add-btn" onClick={() => setShowAddModal(true)}>
+                <button className="add-btn" onClick={openAddModal}>
                     <Plus size={18} />
-                    Add
+                    Add Product
                 </button>
             </div>
 
@@ -148,24 +174,29 @@ const InventoryScreen: React.FC = () => {
                             <div className="product-item__info">
                                 <h3 className="product-item__name">{p.name}</h3>
                                 <p className="product-item__price">${p.price}</p>
-                                <p className="product-item__cat">{p.category}</p>
+                                <p className="product-item__cat">{p.category} • Stock: {p.stock || 0}</p>
                             </div>
-                            <button className="product-item__delete" onClick={() => handleDeleteProduct(p.id)}>
-                                <Trash2 size={16} />
-                            </button>
+                            <div className="product-item__actions">
+                                <button className="product-item__btn edit" onClick={() => openEditModal(p)}>
+                                    <Edit2 size={16} />
+                                </button>
+                                <button className="product-item__btn delete" onClick={() => handleDeleteProduct(p.id)}>
+                                    <Trash2 size={16} />
+                                </button>
+                            </div>
                         </div>
                     ))}
                 </div>
             )}
 
-            {showAddModal && (
+            {showModal && (
                 <div className="modal-overlay">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h2 className="modal-title">New Product</h2>
-                            <button onClick={() => setShowAddModal(false)}><X size={20} /></button>
+                            <h2 className="modal-title">{editingProduct ? 'Edit Product' : 'New Product'}</h2>
+                            <button onClick={() => setShowModal(false)}><X size={20} /></button>
                         </div>
-                        <form onSubmit={handleAddProduct} className="modal-form">
+                        <form onSubmit={handleSubmit} className="modal-form">
                             <div className="form-group">
                                 <label>Product Name</label>
                                 <input type="text" value={name} onChange={e => setName(e.target.value)} required placeholder="e.g. Custom Keychain" />
@@ -176,20 +207,24 @@ const InventoryScreen: React.FC = () => {
                                     <input type="number" step="0.01" value={price} onChange={e => setPrice(e.target.value)} required placeholder="10.00" />
                                 </div>
                                 <div className="form-group">
-                                    <label>Category</label>
-                                    <select value={category} onChange={e => setCategory(e.target.value)}>
-                                        <option value="keychain">Keychain</option>
-                                        <option value="tag">Tag</option>
-                                        <option value="accessory">Accessory</option>
-                                    </select>
+                                    <label>Stock</label>
+                                    <input type="number" value={stock} onChange={e => setStock(e.target.value)} required placeholder="10" />
                                 </div>
+                            </div>
+                            <div className="form-group">
+                                <label>Category</label>
+                                <select value={category} onChange={e => setCategory(e.target.value)}>
+                                    <option value="keychain">Keychain</option>
+                                    <option value="tag">Tag</option>
+                                    <option value="accessory">Accessory</option>
+                                </select>
                             </div>
                             <div className="form-group">
                                 <label>Description</label>
                                 <textarea value={description} onChange={e => setDescription(e.target.value)} required placeholder="Product details..." rows={3} />
                             </div>
                             <div className="form-group">
-                                <label>Images (Select multiple)</label>
+                                <label>Images {editingProduct && '(Leave empty to keep existing)'}</label>
                                 <div className="file-input-wrap">
                                     <input type="file" multiple accept="image/*" onChange={e => setFiles(e.target.files)} id="file-input" className="hidden-input" />
                                     <label htmlFor="file-input" className="file-input-label">
@@ -199,7 +234,7 @@ const InventoryScreen: React.FC = () => {
                                 </div>
                             </div>
                             <button type="submit" className="submit-btn" disabled={uploading}>
-                                {uploading ? <><Loader2 size={18} className="animate-spin" /> Uploading...</> : 'Save Product'}
+                                {uploading ? <><Loader2 size={18} className="animate-spin" /> {editingProduct ? 'Updating...' : 'Uploading...'}</> : (editingProduct ? 'Update Product' : 'Save Product')}
                             </button>
                         </form>
                     </div>

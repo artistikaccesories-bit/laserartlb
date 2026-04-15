@@ -742,12 +742,27 @@ input { font-family: inherit; }
 .product-item__name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
 .product-item__price { font-size: 13px; color: var(--green); font-weight: 600; }
 .product-item__cat { font-size: 11px; color: var(--text-secondary); text-transform: capitalize; }
-.product-item__delete {
-  padding: 8px;
-  color: var(--text-muted);
-  transition: color 0.2s;
+.product-item__actions {
+  display: flex;
+  gap: 4px;
 }
-.product-item__delete:hover { color: var(--red); }
+.product-item__btn {
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+.product-item__btn.edit:hover {
+  background: var(--blue);
+  color: white;
+}
+.product-item__btn.delete:hover {
+  color: var(--red);
+  background: var(--red-dim);
+}
 
 .add-btn {
   display: flex;
@@ -951,3 +966,37 @@ input { font-family: inherit; }
 .animate-in { animation-duration: 0.5s; animation-fill-mode: both; }
 .fade-in { animation-name: fadeIn; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ─── Orders ─────────────────────────────────────────── */
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 100px;
+}
+.status-badge.pending { background: var(--yellow-dim); color: var(--yellow); border: 1px solid rgba(234, 179, 8, 0.2); }
+.status-badge.completed { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34, 197, 94, 0.2); }
+.status-badge.cancelled { background: var(--red-dim); color: var(--red); border: 1px solid rgba(239, 68, 68, 0.2); }
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    transition: all 0.2s;
+}
+.action-btn--green { background: var(--green); color: white; }
+.action-btn--green:hover { background: #16a34a; }
+.action-btn--red { background: var(--red-dim); color: var(--red); border: 1px solid rgba(239, 68, 68, 0.2); }
+.action-btn--red:hover { background: var(--red); color: white; }
+.action-btn--outline { background: transparent; border: 1px solid var(--border); color: var(--text-secondary); }
+.action-btn--outline:hover { border-color: var(--border-hover); color: var(--text); }

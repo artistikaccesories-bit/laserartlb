@@ -13,11 +13,8 @@ import Services from './components/Services.tsx';
 import CustomPreview from './components/CustomPreview.tsx';
 import SocialProof from './components/SocialProof.tsx';
 import TrustBadges from './components/TrustBadges.tsx';
-import Countdown from './components/Countdown.tsx';
-import LiveVisitorCounter from './components/LiveVisitorCounter.tsx';
 import ExitIntentPopup from './components/ExitIntentPopup.tsx';
 import AdminDashboard from './components/AdminDashboard.tsx';
-import SalesPopup from './components/SalesPopup.tsx';
 
 import GallerySelector from './components/GallerySelector.tsx';
 import { Product, CartItem } from './types.ts';
@@ -522,7 +519,7 @@ function App() {
   const subtotal = cart.reduce((sum, item) => sum + ((item.price + (item.isDoubleSided ? 5 : 0) + (item.isGiftBox ? 2 : 0)) * item.quantity), 0);
   const total = subtotal + (deliveryType === 'express' ? deliveryCosts.express : deliveryType === 'standard' ? deliveryCosts.standard : 0);
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     const itemsList = cart.map(item => {
       const extras = [];
       if (item.isDoubleSided) extras.push('Double Sided (+$5)');
@@ -537,7 +534,29 @@ function App() {
 
     const deliveryInfo = deliveryType === 'express' ? `🚀 Express (48h) - $${deliveryCosts.express}` : deliveryType === 'standard' ? `🚚 Standard - $${deliveryCosts.standard}` : '🏠 Pickup - $0';
 
-    const message = `*LASERARTLB - NEW ORDER*\n\n*Items:*\n${itemsList}\n\n*Delivery:* ${deliveryInfo}\n*Total:* $${total}\n\n*Customer Request:* I've confirmed my order via the website.`;
+    const orderId = `LX-${Date.now().toString().slice(-6)}-${Math.floor(Math.random() * 1000)}`;
+
+    // Save order to Firestore if possible
+    if (db) {
+      try {
+        await addDoc(collection(db, 'orders'), {
+          orderId,
+          items: cart,
+          total,
+          subtotal,
+          deliveryType,
+          deliveryCost: deliveryType === 'express' ? deliveryCosts.express : deliveryType === 'standard' ? deliveryCosts.standard : 0,
+          timestamp: Timestamp.now(),
+          status: 'pending',
+          device: sessionStorage.getItem('website_visitor_device') || 'Unknown',
+          location: JSON.parse(sessionStorage.getItem('website_visitor_geo') || '{}')
+        });
+      } catch (err) {
+        console.error("Error saving order:", err);
+      }
+    }
+
+    const message = `*LASERARTLB - ORDER ${orderId}*\n\n*Items:*\n${itemsList}\n\n*Delivery:* ${deliveryInfo}\n*Total:* $${total}\n\n*Order ID:* ${orderId}\n\n*Customer Request:* I've confirmed my order via the website.`;
 
     window.open(`https://wa.me/96181388115?text=${encodeURIComponent(message)}`, '_blank');
   };
@@ -548,8 +567,6 @@ function App() {
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-white selection:text-black relative">
-      <LiveVisitorCounter />
-      <Countdown />
       <Navbar
         activeTab={activeTab}
         setActiveTab={handleTabChange}
@@ -642,9 +659,6 @@ function App() {
 
       {/* Exit Intent Pop-up */}
       <ExitIntentPopup cartItemsCount={cart.reduce((total, item) => total + item.quantity, 0)} />
-
-      {/* Social Proof Sales Popup */}
-      <SalesPopup />
     </div>
   );
 }
