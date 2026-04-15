@@ -34,7 +34,6 @@ ios/
 !src/assets/*.png
 
 # Desktop Admin App
-laserart-desktop-admin/
 
 # Binaries
 *.apk
