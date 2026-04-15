@@ -1,0 +1,7 @@
+{
+  "name": "LaserArtLB - Custom Laser Engraving Studio",
+  "description": "A modern, AI-powered storefront for custom laser-engraved keychains and precision laser-cut designs.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

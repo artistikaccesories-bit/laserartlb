@@ -1,0 +1,43 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+# Build Artifacts
+dist
+dist-ssr
+out.js
+out.css
+output.css
+hashes.json
+*.local
+.env
+.firebaserc
+capacitor.config.ts
+
+# Application Folders
+android/
+ios/
+*-win32-x64
+
+# Icons & Media (Private)
+*.ico
+*.icns
+*.png
+!public/images/*.png
+!public/images/*.ico
+!src/assets/*.png
+
+# Desktop Admin App
+laserart-desktop-admin/
+
+# Binaries
+*.apk
+*.exe
+dist-electron/
+*-win32-x64/
